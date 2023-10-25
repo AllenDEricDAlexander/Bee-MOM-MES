@@ -3,6 +3,8 @@
 ```xml
 schema.xml
 只配置一个demo暂时，还在考虑是否要换数据库选型。例如doris，pgsql，polardb，tidb等，mycat+mysql较为麻烦。后续调整及自动化配置脚本，静待更新。
+目前的思路是垂直分库，各个微服务访问自己的库。水平分表，规则的id mod 2。
+
 <schema name="MAIN_DATA" checkSQLschema="false" sqlMaxLimit="100">
     <table name="material" primaryKey="id" dataNode="material1,material2" rule="mod_rule" autoIncrement="true">
         <childTable name="material_type" primaryKey="material_type_id" joinKey="material_id" parentKey="material_id"></childTable>
