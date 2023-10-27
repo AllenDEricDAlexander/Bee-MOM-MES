@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.master_data.dao.JobDao">
+
+    <resultMap type="top.atluofu.master_data.entity.Job" id="JobMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="jobNo" column="job_no" jdbcType="VARCHAR"/>
+        <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
+        <result property="jobCode" column="job_code" jdbcType="VARCHAR"/>
+        <result property="jobStatus" column="job_status" jdbcType="INTEGER"/>
+        <result property="requireNumber" column="require_number" jdbcType="INTEGER"/>
+        <result property="currentNumber" column="current_number" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="deletedTime" column="deleted_time" jdbcType="TIMESTAMP"/>
+        <result property="departmentId" column="department_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.job(job_no, job_name, job_code, job_status, require_number, current_number, remark, deleted, create_time, deleted_time, department_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.jobNo}, #{entity.jobName}, #{entity.jobCode}, #{entity.jobStatus}, #{entity.requireNumber}, #{entity.currentNumber}, #{entity.remark}, #{entity.deleted}, #{entity.createTime}, #{entity.deletedTime}, #{entity.departmentId})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.job(job_no, job_name, job_code, job_status, require_number, current_number, remark, deleted, create_time, deleted_time, department_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.jobNo}, #{entity.jobName}, #{entity.jobCode}, #{entity.jobStatus}, #{entity.requireNumber}, #{entity.currentNumber}, #{entity.remark}, #{entity.deleted}, #{entity.createTime}, #{entity.deletedTime}, #{entity.departmentId})
+        </foreach>
+        on duplicate key update
+         job_no = values(job_no) , job_name = values(job_name) , job_code = values(job_code) , job_status = values(job_status) , require_number = values(require_number) , current_number = values(current_number) , remark = values(remark) , deleted = values(deleted) , create_time = values(create_time) , deleted_time = values(deleted_time) , department_id = values(department_id)     </insert>
+
+</mapper>
+

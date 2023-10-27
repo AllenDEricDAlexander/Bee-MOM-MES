@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.master_data.dao.ProductionToolingDao">
+
+    <resultMap type="top.atluofu.master_data.entity.ProductionTooling" id="ProductionToolingMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="productionToolingNo" column="production_tooling_no" jdbcType="VARCHAR"/>
+        <result property="productionToolingName" column="production_tooling_name" jdbcType="VARCHAR"/>
+        <result property="productionToolingTypeNo" column="production_tooling_type_no" jdbcType="INTEGER"/>
+        <result property="productionEquipmentNumber" column="production_equipment_number" jdbcType="INTEGER"/>
+        <result property="hazardLevel" column="hazard_level" jdbcType="INTEGER"/>
+        <result property="importanceLevel" column="importance_level" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.production_tooling(production_tooling_no, production_tooling_name, production_tooling_type_no, production_equipment_number, hazard_level, importance_level, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.productionToolingNo}, #{entity.productionToolingName}, #{entity.productionToolingTypeNo}, #{entity.productionEquipmentNumber}, #{entity.hazardLevel}, #{entity.importanceLevel}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.production_tooling(production_tooling_no, production_tooling_name, production_tooling_type_no, production_equipment_number, hazard_level, importance_level, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.productionToolingNo}, #{entity.productionToolingName}, #{entity.productionToolingTypeNo}, #{entity.productionEquipmentNumber}, #{entity.hazardLevel}, #{entity.importanceLevel}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+         production_tooling_no = values(production_tooling_no) , production_tooling_name = values(production_tooling_name) , production_tooling_type_no = values(production_tooling_type_no) , production_equipment_number = values(production_equipment_number) , hazard_level = values(hazard_level) , importance_level = values(importance_level) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>
+
+</mapper>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.master_data.dao.DepartmentDao">
+
+    <resultMap type="top.atluofu.master_data.entity.Department" id="DepartmentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="fatherId" column="father_id" jdbcType="INTEGER"/>
+        <result property="departmentName" column="department_name" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="enableStatus" column="enable_status" jdbcType="INTEGER"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.department(father_id, department_name, sort, enable_status, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.fatherId}, #{entity.departmentName}, #{entity.sort}, #{entity.enableStatus}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.department(father_id, department_name, sort, enable_status, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.fatherId}, #{entity.departmentName}, #{entity.sort}, #{entity.enableStatus}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+         father_id = values(father_id) , department_name = values(department_name) , sort = values(sort) , enable_status = values(enable_status) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>
+
+</mapper>
+

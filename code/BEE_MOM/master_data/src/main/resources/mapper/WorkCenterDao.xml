@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.master_data.dao.WorkCenterDao">
+
+    <resultMap type="top.atluofu.master_data.entity.WorkCenter" id="WorkCenterMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="workCenterNo" column="work_center_no" jdbcType="VARCHAR"/>
+        <result property="workCenterName" column="work_center_name" jdbcType="VARCHAR"/>
+        <result property="workCenterLocation" column="work_center_location" jdbcType="VARCHAR"/>
+        <result property="productionLineId" column="production_line_id" jdbcType="INTEGER"/>
+        <result property="workshopNo" column="workshop_no" jdbcType="INTEGER"/>
+        <result property="headId" column="head_id" jdbcType="INTEGER"/>
+        <result property="productionProcessesId" column="production_processes_id" jdbcType="INTEGER"/>
+        <result property="enableStatus" column="enable_status" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.work_center(work_center_no, work_center_name, work_center_location, production_line_id, workshop_no, head_id, production_processes_id, enable_status, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.workCenterNo}, #{entity.workCenterName}, #{entity.workCenterLocation}, #{entity.productionLineId}, #{entity.workshopNo}, #{entity.headId}, #{entity.productionProcessesId}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into enterprise_master_data.work_center(work_center_no, work_center_name, work_center_location, production_line_id, workshop_no, head_id, production_processes_id, enable_status, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.workCenterNo}, #{entity.workCenterName}, #{entity.workCenterLocation}, #{entity.productionLineId}, #{entity.workshopNo}, #{entity.headId}, #{entity.productionProcessesId}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+         work_center_no = values(work_center_no) , work_center_name = values(work_center_name) , work_center_location = values(work_center_location) , production_line_id = values(production_line_id) , workshop_no = values(workshop_no) , head_id = values(head_id) , production_processes_id = values(production_processes_id) , enable_status = values(enable_status) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>
+
+</mapper>
+
