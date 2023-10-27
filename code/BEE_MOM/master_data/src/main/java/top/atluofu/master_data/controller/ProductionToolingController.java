@@ -1,10 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.ProductionTooling;
+import top.atluofu.master_data.po.ProductionToolingPO;
 import top.atluofu.master_data.service.ProductionToolingService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +19,9 @@ import java.util.List;
  * (ProductionTooling)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:46:28
+ * @since 2023-10-27 09:05:22
  */
-@Api(tags = "模块")
+@Api(tags = "ProductionToolingController模块")
 @RestController
 @Slf4j
 @Validated
@@ -30,20 +31,18 @@ public class ProductionToolingController {
      * 服务对象
      */
     private ProductionToolingService productionToolingService;
-
-    public ProductionToolingController(ProductionToolingService productionToolingService) {
-        this.productionToolingService = productionToolingService;
-    }
+    
+    ProductionToolingController(ProductionToolingService productionToolingService){this.productionToolingService = productionToolingService;}
 
     /**
      * 分页查询所有数据
      *
-     * @param page              分页对象
+     * @param page 分页对象
      * @param productionTooling 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<ProductionTooling> page, ProductionTooling productionTooling) {
+    public ResultUtils selectAll(Page<ProductionToolingPO> page, ProductionToolingPO productionTooling) {
         return ResultUtils.success(this.productionToolingService.page(page, new QueryWrapper<>(productionTooling)));
     }
 
@@ -65,7 +64,7 @@ public class ProductionToolingController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody ProductionTooling productionTooling) {
+    public ResultUtils insert(@RequestBody ProductionToolingPO productionTooling) {
         return ResultUtils.success(this.productionToolingService.save(productionTooling));
     }
 
@@ -76,7 +75,7 @@ public class ProductionToolingController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody ProductionTooling productionTooling) {
+    public ResultUtils update(@RequestBody ProductionToolingPO productionTooling) {
         return ResultUtils.success(this.productionToolingService.updateById(productionTooling));
     }
 

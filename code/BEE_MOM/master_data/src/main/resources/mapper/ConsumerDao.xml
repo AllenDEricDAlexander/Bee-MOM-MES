@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.atluofu.master_data.dao.ConsumerDao">
 
-    <resultMap type="top.atluofu.master_data.entity.Consumer" id="ConsumerMap">
+    <resultMap type="top.atluofu.master_data.po.ConsumerPO" id="ConsumerPOMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="consumerNo" column="consumer_no" jdbcType="VARCHAR"/>
         <result property="consumerName" column="consumer_name" jdbcType="VARCHAR"/>
@@ -19,19 +19,19 @@
     </resultMap>
 
     <!-- 批量插入 -->
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertBatch" keyProperty="id" >
         insert into enterprise_master_data.consumer(consumer_no, consumer_name, short_name, consumer_type, consumer_phone, consumer_contact, concumer_contact_phone, enable_status, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.consumerNo}, #{entity.consumerName}, #{entity.shortName}, #{entity.consumerType}, #{entity.consumerPhone}, #{entity.consumerContact}, #{entity.concumerContactPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        (#{entity.id}, #{entity.consumerNo}, #{entity.consumerName}, #{entity.shortName}, #{entity.consumerType}, #{entity.consumerPhone}, #{entity.consumerContact}, #{entity.concumerContactPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch" keyProperty="id">
         insert into enterprise_master_data.consumer(consumer_no, consumer_name, short_name, consumer_type, consumer_phone, consumer_contact, concumer_contact_phone, enable_status, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.consumerNo}, #{entity.consumerName}, #{entity.shortName}, #{entity.consumerType}, #{entity.consumerPhone}, #{entity.consumerContact}, #{entity.concumerContactPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+            (#{entity.id}, #{entity.consumerNo}, #{entity.consumerName}, #{entity.shortName}, #{entity.consumerType}, #{entity.consumerPhone}, #{entity.consumerContact}, #{entity.concumerContactPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
         on duplicate key update
          consumer_no = values(consumer_no) , consumer_name = values(consumer_name) , short_name = values(short_name) , consumer_type = values(consumer_type) , consumer_phone = values(consumer_phone) , consumer_contact = values(consumer_contact) , concumer_contact_phone = values(concumer_contact_phone) , enable_status = values(enable_status) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.atluofu.master_data.dao.WorkshopDao">
 
-    <resultMap type="top.atluofu.master_data.entity.Workshop" id="WorkshopMap">
+    <resultMap type="top.atluofu.master_data.po.WorkshopPO" id="WorkshopPOMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="workshopNo" column="workshop_no" jdbcType="VARCHAR"/>
         <result property="workshopName" column="workshop_name" jdbcType="VARCHAR"/>
@@ -17,19 +17,19 @@
     </resultMap>
 
     <!-- 批量插入 -->
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertBatch" keyProperty="id" >
         insert into enterprise_master_data.workshop(workshop_no, workshop_name, department_id, head_id, workshop_area, enable_status, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.workshopNo}, #{entity.workshopName}, #{entity.departmentId}, #{entity.headId}, #{entity.workshopArea}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        (#{entity.id}, #{entity.workshopNo}, #{entity.workshopName}, #{entity.departmentId}, #{entity.headId}, #{entity.workshopArea}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch" keyProperty="id">
         insert into enterprise_master_data.workshop(workshop_no, workshop_name, department_id, head_id, workshop_area, enable_status, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.workshopNo}, #{entity.workshopName}, #{entity.departmentId}, #{entity.headId}, #{entity.workshopArea}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+            (#{entity.id}, #{entity.workshopNo}, #{entity.workshopName}, #{entity.departmentId}, #{entity.headId}, #{entity.workshopArea}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
         on duplicate key update
          workshop_no = values(workshop_no) , workshop_name = values(workshop_name) , department_id = values(department_id) , head_id = values(head_id) , workshop_area = values(workshop_area) , enable_status = values(enable_status) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>

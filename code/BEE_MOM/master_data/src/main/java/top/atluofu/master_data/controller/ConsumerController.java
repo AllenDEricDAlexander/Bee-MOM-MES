@@ -5,7 +5,7 @@ package top.atluofu.master_data.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Consumer;
+import top.atluofu.master_data.po.ConsumerPO;
 import top.atluofu.master_data.service.ConsumerService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +19,7 @@ import java.util.List;
  * (Consumer)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 23:40:25
+ * @since 2023-10-27 09:04:46
  */
 @Api(tags = "ConsumerController模块")
 @RestController
@@ -42,7 +42,7 @@ public class ConsumerController {
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Consumer> page, Consumer consumer) {
+    public ResultUtils selectAll(Page<ConsumerPO> page, ConsumerPO consumer) {
         return ResultUtils.success(this.consumerService.page(page, new QueryWrapper<>(consumer)));
     }
 
@@ -64,7 +64,7 @@ public class ConsumerController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Consumer consumer) {
+    public ResultUtils insert(@RequestBody ConsumerPO consumer) {
         return ResultUtils.success(this.consumerService.save(consumer));
     }
 
@@ -75,7 +75,7 @@ public class ConsumerController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Consumer consumer) {
+    public ResultUtils update(@RequestBody ConsumerPO consumer) {
         return ResultUtils.success(this.consumerService.updateById(consumer));
     }
 

@@ -1,11 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.ApiOperation;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.CompanyStaff;
+import top.atluofu.master_data.po.CompanyStaffPO;
 import top.atluofu.master_data.service.CompanyStaffService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +19,7 @@ import java.util.List;
  * (CompanyStaff)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 23:40:11
+ * @since 2023-10-27 09:04:40
  */
 @Api(tags = "CompanyStaffController模块")
 @RestController
@@ -31,21 +31,18 @@ public class CompanyStaffController {
      * 服务对象
      */
     private CompanyStaffService companyStaffService;
-
-    CompanyStaffController(CompanyStaffService companyStaffService) {
-        this.companyStaffService = companyStaffService;
-    }
+    
+    CompanyStaffController(CompanyStaffService companyStaffService){this.companyStaffService = companyStaffService;}
 
     /**
      * 分页查询所有数据
      *
-     * @param page         分页对象
+     * @param page 分页对象
      * @param companyStaff 查询实体
      * @return 所有数据
      */
     @GetMapping
-    @ApiOperation(value = "分页查看所有数据", notes = "分页查看所有数据")
-    public ResultUtils selectAll(Page<CompanyStaff> page, CompanyStaff companyStaff) {
+    public ResultUtils selectAll(Page<CompanyStaffPO> page, CompanyStaffPO companyStaff) {
         return ResultUtils.success(this.companyStaffService.page(page, new QueryWrapper<>(companyStaff)));
     }
 
@@ -67,7 +64,7 @@ public class CompanyStaffController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody CompanyStaff companyStaff) {
+    public ResultUtils insert(@RequestBody CompanyStaffPO companyStaff) {
         return ResultUtils.success(this.companyStaffService.save(companyStaff));
     }
 
@@ -78,7 +75,7 @@ public class CompanyStaffController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody CompanyStaff companyStaff) {
+    public ResultUtils update(@RequestBody CompanyStaffPO companyStaff) {
         return ResultUtils.success(this.companyStaffService.updateById(companyStaff));
     }
 

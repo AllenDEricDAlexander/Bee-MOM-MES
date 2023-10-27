@@ -5,7 +5,7 @@ package top.atluofu.master_data.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Role;
+import top.atluofu.master_data.po.RolePO;
 import top.atluofu.master_data.service.RoleService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,9 +19,9 @@ import java.util.List;
  * (Role)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:46:39
+ * @since 2023-10-27 09:05:26
  */
-@Api(tags = "模块")
+@Api(tags = "RoleController模块")
 @RestController
 @Slf4j
 @Validated
@@ -31,10 +31,8 @@ public class RoleController {
      * 服务对象
      */
     private RoleService roleService;
-
-    public RoleController(RoleService roleService) {
-        this.roleService = roleService;
-    }
+    
+    RoleController(RoleService roleService){this.roleService = roleService;}
 
     /**
      * 分页查询所有数据
@@ -44,7 +42,7 @@ public class RoleController {
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Role> page, Role role) {
+    public ResultUtils selectAll(Page<RolePO> page, RolePO role) {
         return ResultUtils.success(this.roleService.page(page, new QueryWrapper<>(role)));
     }
 
@@ -66,7 +64,7 @@ public class RoleController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Role role) {
+    public ResultUtils insert(@RequestBody RolePO role) {
         return ResultUtils.success(this.roleService.save(role));
     }
 
@@ -77,7 +75,7 @@ public class RoleController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Role role) {
+    public ResultUtils update(@RequestBody RolePO role) {
         return ResultUtils.success(this.roleService.updateById(role));
     }
 

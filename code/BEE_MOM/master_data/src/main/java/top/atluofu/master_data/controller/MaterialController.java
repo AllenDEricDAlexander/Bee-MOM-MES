@@ -5,7 +5,7 @@ package top.atluofu.master_data.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Material;
+import top.atluofu.master_data.po.MaterialPO;
 import top.atluofu.master_data.service.MaterialService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,9 +19,9 @@ import java.util.List;
  * (Material)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:44:18
+ * @since 2023-10-27 09:05:01
  */
-@Api(tags = "模块")
+@Api(tags = "MaterialController模块")
 @RestController
 @Slf4j
 @Validated
@@ -31,10 +31,8 @@ public class MaterialController {
      * 服务对象
      */
     private MaterialService materialService;
-
-    public MaterialController(MaterialService materialService) {
-        this.materialService = materialService;
-    }
+    
+    MaterialController(MaterialService materialService){this.materialService = materialService;}
 
     /**
      * 分页查询所有数据
@@ -44,7 +42,7 @@ public class MaterialController {
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Material> page, Material material) {
+    public ResultUtils selectAll(Page<MaterialPO> page, MaterialPO material) {
         return ResultUtils.success(this.materialService.page(page, new QueryWrapper<>(material)));
     }
 
@@ -66,7 +64,7 @@ public class MaterialController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Material material) {
+    public ResultUtils insert(@RequestBody MaterialPO material) {
         return ResultUtils.success(this.materialService.save(material));
     }
 
@@ -77,7 +75,7 @@ public class MaterialController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Material material) {
+    public ResultUtils update(@RequestBody MaterialPO material) {
         return ResultUtils.success(this.materialService.updateById(material));
     }
 

@@ -1,10 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Job;
+import top.atluofu.master_data.po.JobPO;
 import top.atluofu.master_data.service.JobService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +19,9 @@ import java.util.List;
  * (Job)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:43:59
+ * @since 2023-10-27 09:04:57
  */
-@Api(tags = "模块")
+@Api(tags = "JobController模块")
 @RestController
 @Slf4j
 @Validated
@@ -30,20 +31,18 @@ public class JobController {
      * 服务对象
      */
     private JobService jobService;
-
-    public JobController(JobService jobService) {
-        this.jobService = jobService;
-    }
+    
+    JobController(JobService jobService){this.jobService = jobService;}
 
     /**
      * 分页查询所有数据
      *
      * @param page 分页对象
-     * @param job  查询实体
+     * @param job 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Job> page, Job job) {
+    public ResultUtils selectAll(Page<JobPO> page, JobPO job) {
         return ResultUtils.success(this.jobService.page(page, new QueryWrapper<>(job)));
     }
 
@@ -65,7 +64,7 @@ public class JobController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Job job) {
+    public ResultUtils insert(@RequestBody JobPO job) {
         return ResultUtils.success(this.jobService.save(job));
     }
 
@@ -76,7 +75,7 @@ public class JobController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Job job) {
+    public ResultUtils update(@RequestBody JobPO job) {
         return ResultUtils.success(this.jobService.updateById(job));
     }
 

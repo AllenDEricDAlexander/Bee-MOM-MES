@@ -1,15 +1,15 @@
 package top.atluofu.master_data.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import top.atluofu.master_data.entity.Workshop;
+import top.atluofu.master_data.po.WorkshopPO;
 
 /**
  * (Workshop)表服务接口
  *
  * @author atluofu
- * @since 2023-10-26 22:47:06
+ * @since 2023-10-27 09:05:43
  */
-public interface WorkshopService extends IService<Workshop> {
+public interface WorkshopService extends IService<WorkshopPO> {
 
 }
 

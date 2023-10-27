@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.atluofu.master_data.dao.SupplierDao">
 
-    <resultMap type="top.atluofu.master_data.entity.Supplier" id="SupplierMap">
+    <resultMap type="top.atluofu.master_data.po.SupplierPO" id="SupplierPOMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="supplierNo" column="supplier_no" jdbcType="VARCHAR"/>
         <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
@@ -18,19 +18,19 @@
     </resultMap>
 
     <!-- 批量插入 -->
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertBatch" keyProperty="id" >
         insert into enterprise_master_data.supplier(supplier_no, supplier_name, short_name, supplier_grade, supplier_score, supplier_phone, enable_status, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.supplierNo}, #{entity.supplierName}, #{entity.shortName}, #{entity.supplierGrade}, #{entity.supplierScore}, #{entity.supplierPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        (#{entity.id}, #{entity.supplierNo}, #{entity.supplierName}, #{entity.shortName}, #{entity.supplierGrade}, #{entity.supplierScore}, #{entity.supplierPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch" keyProperty="id">
         insert into enterprise_master_data.supplier(supplier_no, supplier_name, short_name, supplier_grade, supplier_score, supplier_phone, enable_status, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.supplierNo}, #{entity.supplierName}, #{entity.shortName}, #{entity.supplierGrade}, #{entity.supplierScore}, #{entity.supplierPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+            (#{entity.id}, #{entity.supplierNo}, #{entity.supplierName}, #{entity.shortName}, #{entity.supplierGrade}, #{entity.supplierScore}, #{entity.supplierPhone}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
         on duplicate key update
          supplier_no = values(supplier_no) , supplier_name = values(supplier_name) , short_name = values(short_name) , supplier_grade = values(supplier_grade) , supplier_score = values(supplier_score) , supplier_phone = values(supplier_phone) , enable_status = values(enable_status) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>

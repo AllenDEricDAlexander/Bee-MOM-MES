@@ -1,10 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.ProductionEquipment;
+import top.atluofu.master_data.po.ProductionEquipmentPO;
 import top.atluofu.master_data.service.ProductionEquipmentService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +19,9 @@ import java.util.List;
  * (ProductionEquipment)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:46:10
+ * @since 2023-10-27 09:05:16
  */
-@Api(tags = "模块")
+@Api(tags = "ProductionEquipmentController模块")
 @RestController
 @Slf4j
 @Validated
@@ -30,20 +31,18 @@ public class ProductionEquipmentController {
      * 服务对象
      */
     private ProductionEquipmentService productionEquipmentService;
-
-    public ProductionEquipmentController(ProductionEquipmentService productionEquipmentService) {
-        this.productionEquipmentService = productionEquipmentService;
-    }
+    
+    ProductionEquipmentController(ProductionEquipmentService productionEquipmentService){this.productionEquipmentService = productionEquipmentService;}
 
     /**
      * 分页查询所有数据
      *
-     * @param page                分页对象
+     * @param page 分页对象
      * @param productionEquipment 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<ProductionEquipment> page, ProductionEquipment productionEquipment) {
+    public ResultUtils selectAll(Page<ProductionEquipmentPO> page, ProductionEquipmentPO productionEquipment) {
         return ResultUtils.success(this.productionEquipmentService.page(page, new QueryWrapper<>(productionEquipment)));
     }
 
@@ -65,7 +64,7 @@ public class ProductionEquipmentController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody ProductionEquipment productionEquipment) {
+    public ResultUtils insert(@RequestBody ProductionEquipmentPO productionEquipment) {
         return ResultUtils.success(this.productionEquipmentService.save(productionEquipment));
     }
 
@@ -76,7 +75,7 @@ public class ProductionEquipmentController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody ProductionEquipment productionEquipment) {
+    public ResultUtils update(@RequestBody ProductionEquipmentPO productionEquipment) {
         return ResultUtils.success(this.productionEquipmentService.updateById(productionEquipment));
     }
 

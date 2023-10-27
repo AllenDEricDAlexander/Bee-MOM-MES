@@ -1,10 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Department;
+import top.atluofu.master_data.po.DepartmentPO;
 import top.atluofu.master_data.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +19,9 @@ import java.util.List;
  * (Department)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:43:45
+ * @since 2023-10-27 09:04:50
  */
-@Api(tags = "模块")
+@Api(tags = "DepartmentController模块")
 @RestController
 @Slf4j
 @Validated
@@ -29,22 +30,19 @@ public class DepartmentController {
     /**
      * 服务对象
      */
-
     private DepartmentService departmentService;
-
-    public DepartmentController(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
+    
+    DepartmentController(DepartmentService departmentService){this.departmentService = departmentService;}
 
     /**
      * 分页查询所有数据
      *
-     * @param page       分页对象
+     * @param page 分页对象
      * @param department 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Department> page, Department department) {
+    public ResultUtils selectAll(Page<DepartmentPO> page, DepartmentPO department) {
         return ResultUtils.success(this.departmentService.page(page, new QueryWrapper<>(department)));
     }
 
@@ -66,7 +64,7 @@ public class DepartmentController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Department department) {
+    public ResultUtils insert(@RequestBody DepartmentPO department) {
         return ResultUtils.success(this.departmentService.save(department));
     }
 
@@ -77,7 +75,7 @@ public class DepartmentController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Department department) {
+    public ResultUtils update(@RequestBody DepartmentPO department) {
         return ResultUtils.success(this.departmentService.updateById(department));
     }
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.atluofu.master_data.dao.ProductionEquipmentDao">
 
-    <resultMap type="top.atluofu.master_data.entity.ProductionEquipment" id="ProductionEquipmentMap">
+    <resultMap type="top.atluofu.master_data.po.ProductionEquipmentPO" id="ProductionEquipmentPOMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="productionEquipmentNo" column="production_equipment_no" jdbcType="VARCHAR"/>
         <result property="productionEquipmentName" column="production_equipment_name" jdbcType="VARCHAR"/>
@@ -17,19 +17,19 @@
     </resultMap>
 
     <!-- 批量插入 -->
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertBatch" keyProperty="id" >
         insert into enterprise_master_data.production_equipment(production_equipment_no, production_equipment_name, production_equipment_type_no, production_equipment_number, hazard_level, importance_level, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.productionEquipmentNo}, #{entity.productionEquipmentName}, #{entity.productionEquipmentTypeNo}, #{entity.productionEquipmentNumber}, #{entity.hazardLevel}, #{entity.importanceLevel}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        (#{entity.id}, #{entity.productionEquipmentNo}, #{entity.productionEquipmentName}, #{entity.productionEquipmentTypeNo}, #{entity.productionEquipmentNumber}, #{entity.hazardLevel}, #{entity.importanceLevel}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch" keyProperty="id">
         insert into enterprise_master_data.production_equipment(production_equipment_no, production_equipment_name, production_equipment_type_no, production_equipment_number, hazard_level, importance_level, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.productionEquipmentNo}, #{entity.productionEquipmentName}, #{entity.productionEquipmentTypeNo}, #{entity.productionEquipmentNumber}, #{entity.hazardLevel}, #{entity.importanceLevel}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+            (#{entity.id}, #{entity.productionEquipmentNo}, #{entity.productionEquipmentName}, #{entity.productionEquipmentTypeNo}, #{entity.productionEquipmentNumber}, #{entity.hazardLevel}, #{entity.importanceLevel}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
         on duplicate key update
          production_equipment_no = values(production_equipment_no) , production_equipment_name = values(production_equipment_name) , production_equipment_type_no = values(production_equipment_type_no) , production_equipment_number = values(production_equipment_number) , hazard_level = values(hazard_level) , importance_level = values(importance_level) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>

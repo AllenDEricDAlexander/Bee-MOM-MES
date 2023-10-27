@@ -1,10 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Product;
+import top.atluofu.master_data.po.ProductPO;
 import top.atluofu.master_data.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +19,9 @@ import java.util.List;
  * (Product)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:44:39
+ * @since 2023-10-27 09:05:08
  */
-@Api(tags = "模块")
+@Api(tags = "ProductController模块")
 @RestController
 @Slf4j
 @Validated
@@ -30,20 +31,18 @@ public class ProductController {
      * 服务对象
      */
     private ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    
+    ProductController(ProductService productService){this.productService = productService;}
 
     /**
      * 分页查询所有数据
      *
-     * @param page    分页对象
+     * @param page 分页对象
      * @param product 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Product> page, Product product) {
+    public ResultUtils selectAll(Page<ProductPO> page, ProductPO product) {
         return ResultUtils.success(this.productService.page(page, new QueryWrapper<>(product)));
     }
 
@@ -65,7 +64,7 @@ public class ProductController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Product product) {
+    public ResultUtils insert(@RequestBody ProductPO product) {
         return ResultUtils.success(this.productService.save(product));
     }
 
@@ -76,7 +75,7 @@ public class ProductController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Product product) {
+    public ResultUtils update(@RequestBody ProductPO product) {
         return ResultUtils.success(this.productService.updateById(product));
     }
 

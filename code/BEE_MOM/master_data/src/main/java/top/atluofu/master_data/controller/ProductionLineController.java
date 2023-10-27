@@ -5,7 +5,7 @@ package top.atluofu.master_data.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.ProductionLine;
+import top.atluofu.master_data.po.ProductionLinePO;
 import top.atluofu.master_data.service.ProductionLineService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,9 +19,9 @@ import java.util.List;
  * (ProductionLine)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:46:18
+ * @since 2023-10-27 09:05:19
  */
-@Api(tags = "模块")
+@Api(tags = "ProductionLineController模块")
 @RestController
 @Slf4j
 @Validated
@@ -31,10 +31,8 @@ public class ProductionLineController {
      * 服务对象
      */
     private ProductionLineService productionLineService;
-
-    public ProductionLineController(ProductionLineService productionLineService) {
-        this.productionLineService = productionLineService;
-    }
+    
+    ProductionLineController(ProductionLineService productionLineService){this.productionLineService = productionLineService;}
 
     /**
      * 分页查询所有数据
@@ -44,7 +42,7 @@ public class ProductionLineController {
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<ProductionLine> page, ProductionLine productionLine) {
+    public ResultUtils selectAll(Page<ProductionLinePO> page, ProductionLinePO productionLine) {
         return ResultUtils.success(this.productionLineService.page(page, new QueryWrapper<>(productionLine)));
     }
 
@@ -66,7 +64,7 @@ public class ProductionLineController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody ProductionLine productionLine) {
+    public ResultUtils insert(@RequestBody ProductionLinePO productionLine) {
         return ResultUtils.success(this.productionLineService.save(productionLine));
     }
 
@@ -77,7 +75,7 @@ public class ProductionLineController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody ProductionLine productionLine) {
+    public ResultUtils update(@RequestBody ProductionLinePO productionLine) {
         return ResultUtils.success(this.productionLineService.updateById(productionLine));
     }
 

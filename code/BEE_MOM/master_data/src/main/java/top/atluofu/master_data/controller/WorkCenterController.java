@@ -5,7 +5,7 @@ package top.atluofu.master_data.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.WorkCenter;
+import top.atluofu.master_data.po.WorkCenterPO;
 import top.atluofu.master_data.service.WorkCenterService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,9 +19,9 @@ import java.util.List;
  * (WorkCenter)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:47:00
+ * @since 2023-10-27 09:05:35
  */
-@Api(tags = "模块")
+@Api(tags = "WorkCenterController模块")
 @RestController
 @Slf4j
 @Validated
@@ -31,10 +31,8 @@ public class WorkCenterController {
      * 服务对象
      */
     private WorkCenterService workCenterService;
-
-    public WorkCenterController(WorkCenterService workCenterService) {
-        this.workCenterService = workCenterService;
-    }
+    
+    WorkCenterController(WorkCenterService workCenterService){this.workCenterService = workCenterService;}
 
     /**
      * 分页查询所有数据
@@ -44,7 +42,7 @@ public class WorkCenterController {
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<WorkCenter> page, WorkCenter workCenter) {
+    public ResultUtils selectAll(Page<WorkCenterPO> page, WorkCenterPO workCenter) {
         return ResultUtils.success(this.workCenterService.page(page, new QueryWrapper<>(workCenter)));
     }
 
@@ -66,7 +64,7 @@ public class WorkCenterController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody WorkCenter workCenter) {
+    public ResultUtils insert(@RequestBody WorkCenterPO workCenter) {
         return ResultUtils.success(this.workCenterService.save(workCenter));
     }
 
@@ -77,7 +75,7 @@ public class WorkCenterController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody WorkCenter workCenter) {
+    public ResultUtils update(@RequestBody WorkCenterPO workCenter) {
         return ResultUtils.success(this.workCenterService.updateById(workCenter));
     }
 

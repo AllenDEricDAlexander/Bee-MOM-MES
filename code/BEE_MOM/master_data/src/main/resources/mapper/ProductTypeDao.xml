@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.atluofu.master_data.dao.ProductTypeDao">
 
-    <resultMap type="top.atluofu.master_data.entity.ProductType" id="ProductTypeMap">
+    <resultMap type="top.atluofu.master_data.po.ProductTypePO" id="ProductTypePOMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="productTypeNo" column="product_type_no" jdbcType="VARCHAR"/>
         <result property="productTypeName" column="product_type_name" jdbcType="VARCHAR"/>
@@ -14,19 +14,19 @@
     </resultMap>
 
     <!-- 批量插入 -->
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertBatch" keyProperty="id" >
         insert into enterprise_master_data.product_type(product_type_no, product_type_name, father_type_no, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.productTypeNo}, #{entity.productTypeName}, #{entity.fatherTypeNo}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        (#{entity.id}, #{entity.productTypeNo}, #{entity.productTypeName}, #{entity.fatherTypeNo}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insertOrUpdateBatch" keyProperty="id">
         insert into enterprise_master_data.product_type(product_type_no, product_type_name, father_type_no, remark_info, deleted, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.productTypeNo}, #{entity.productTypeName}, #{entity.fatherTypeNo}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+            (#{entity.id}, #{entity.productTypeNo}, #{entity.productTypeName}, #{entity.fatherTypeNo}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
         on duplicate key update
          product_type_no = values(product_type_no) , product_type_name = values(product_type_name) , father_type_no = values(father_type_no) , remark_info = values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time = values(update_time)     </insert>

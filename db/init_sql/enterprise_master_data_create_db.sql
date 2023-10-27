@@ -22,8 +22,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `company_staff`;
 CREATE TABLE `company_staff`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
-  `pcompany_staff_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `company_staff_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `company_staff_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'company_staff_name',
   `company_staff_phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'company_staff_phone',
   `short_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'short name',
@@ -42,7 +42,7 @@ CREATE TABLE `company_staff`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `consumer`;
 CREATE TABLE `consumer`  (
-  `id` int(0) NOT NULL COMMENT 'pk_id,非自增，业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'pk_id,非自增，业务填写',
   `consumer_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `consumer_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'consumer_name',
   `short_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'short_name',
@@ -63,7 +63,7 @@ CREATE TABLE `consumer`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `department`;
 CREATE TABLE `department`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id，非自增，业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id，非自增，业务填写',
   `father_id` int(0) NULL DEFAULT NULL COMMENT '上级部门id',
   `department_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '部门名称',
   `sort` int(0) NULL DEFAULT NULL COMMENT '排序',
@@ -79,7 +79,7 @@ CREATE TABLE `department`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `job`;
 CREATE TABLE `job`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id，非自增，业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id，非自增，业务填写',
   `job_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '格式0000-0000-0000-0000',
   `job_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'job name',
   `job_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'job code',
@@ -99,7 +99,7 @@ CREATE TABLE `job`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `material`;
 CREATE TABLE `material`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `material_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `material_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'material name',
   `unit` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'unit',
@@ -118,7 +118,7 @@ CREATE TABLE `material`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `material_type`;
 CREATE TABLE `material_type`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `material_type_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `material_type_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'material_type name',
   `father_type_no` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，上级物料类型id',
@@ -134,7 +134,7 @@ CREATE TABLE `material_type`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `product_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `product_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'product name',
   `unit` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'unit',
@@ -152,7 +152,7 @@ CREATE TABLE `product`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `product_type`;
 CREATE TABLE `product_type`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `product_type_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `product_type_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'product_type name',
   `father_type_no` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，上级物料类型id',
@@ -168,7 +168,7 @@ CREATE TABLE `product_type`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `production_equipment`;
 CREATE TABLE `production_equipment`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `production_equipment_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `production_equipment_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'production_equipment name',
   `production_equipment_type_no` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，production_equipment类型id',
@@ -187,7 +187,7 @@ CREATE TABLE `production_equipment`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `production_line`;
 CREATE TABLE `production_line`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `production_line_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `production_line_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'production_line name',
   `workshop_id` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，车间id',
@@ -206,7 +206,7 @@ CREATE TABLE `production_line`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `production_tooling`;
 CREATE TABLE `production_tooling`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `production_tooling_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `production_tooling_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'production_tooling name',
   `production_tooling_type_no` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，production_tooling type',
@@ -225,7 +225,7 @@ CREATE TABLE `production_tooling`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `role_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `role_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'company_staff_name',
   `enable_status` tinyint(1) NOT NULL COMMENT 'enable status',
@@ -241,7 +241,7 @@ CREATE TABLE `role`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `supplier`;
 CREATE TABLE `supplier`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `supplier_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `supplier_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'supplier name',
   `short_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'short name',
@@ -261,7 +261,7 @@ CREATE TABLE `supplier`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `work_center`;
 CREATE TABLE `work_center`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `work_center_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `work_center_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'work_center name',
   `work_center_location` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'work_center location',
@@ -282,7 +282,7 @@ CREATE TABLE `work_center`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `workshop`;
 CREATE TABLE `workshop`  (
-  `id` int(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
+  `id` BIGINT(0) NOT NULL COMMENT 'PK_id,非自增,业务填写',
   `workshop_no` varchar(27) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '格式0000-0000-0000-0000',
   `workshop_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'workshop name',
   `department_id` int(0) NULL DEFAULT NULL COMMENT '逻辑外键，部门或公司 id',

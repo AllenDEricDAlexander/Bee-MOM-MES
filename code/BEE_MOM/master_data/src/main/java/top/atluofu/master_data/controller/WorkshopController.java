@@ -1,10 +1,11 @@
 package top.atluofu.master_data.controller;
 
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.Workshop;
+import top.atluofu.master_data.po.WorkshopPO;
 import top.atluofu.master_data.service.WorkshopService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -18,9 +19,9 @@ import java.util.List;
  * (Workshop)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:47:06
+ * @since 2023-10-27 09:05:43
  */
-@Api(tags = "模块")
+@Api(tags = "WorkshopController模块")
 @RestController
 @Slf4j
 @Validated
@@ -30,20 +31,18 @@ public class WorkshopController {
      * 服务对象
      */
     private WorkshopService workshopService;
-
-    public WorkshopController(WorkshopService workshopService) {
-        this.workshopService = workshopService;
-    }
+    
+    WorkshopController(WorkshopService workshopService){this.workshopService = workshopService;}
 
     /**
      * 分页查询所有数据
      *
-     * @param page     分页对象
+     * @param page 分页对象
      * @param workshop 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<Workshop> page, Workshop workshop) {
+    public ResultUtils selectAll(Page<WorkshopPO> page, WorkshopPO workshop) {
         return ResultUtils.success(this.workshopService.page(page, new QueryWrapper<>(workshop)));
     }
 
@@ -65,7 +64,7 @@ public class WorkshopController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody Workshop workshop) {
+    public ResultUtils insert(@RequestBody WorkshopPO workshop) {
         return ResultUtils.success(this.workshopService.save(workshop));
     }
 
@@ -76,7 +75,7 @@ public class WorkshopController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody Workshop workshop) {
+    public ResultUtils update(@RequestBody WorkshopPO workshop) {
         return ResultUtils.success(this.workshopService.updateById(workshop));
     }
 

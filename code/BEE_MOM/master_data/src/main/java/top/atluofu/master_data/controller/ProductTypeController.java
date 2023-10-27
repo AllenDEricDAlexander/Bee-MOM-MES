@@ -5,7 +5,7 @@ package top.atluofu.master_data.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import top.atluofu.common.result.ResultUtils;
-import top.atluofu.master_data.entity.ProductType;
+import top.atluofu.master_data.po.ProductTypePO;
 import top.atluofu.master_data.service.ProductTypeService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.Validated;
@@ -19,9 +19,9 @@ import java.util.List;
  * (ProductType)表控制层
  *
  * @author atluofu
- * @since 2023-10-26 22:46:00
+ * @since 2023-10-27 09:05:12
  */
-@Api(tags = "模块")
+@Api(tags = "ProductTypeController模块")
 @RestController
 @Slf4j
 @Validated
@@ -31,10 +31,8 @@ public class ProductTypeController {
      * 服务对象
      */
     private ProductTypeService productTypeService;
-
-    public ProductTypeController(ProductTypeService productTypeService) {
-        this.productTypeService = productTypeService;
-    }
+    
+    ProductTypeController(ProductTypeService productTypeService){this.productTypeService = productTypeService;}
 
     /**
      * 分页查询所有数据
@@ -44,7 +42,7 @@ public class ProductTypeController {
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<ProductType> page, ProductType productType) {
+    public ResultUtils selectAll(Page<ProductTypePO> page, ProductTypePO productType) {
         return ResultUtils.success(this.productTypeService.page(page, new QueryWrapper<>(productType)));
     }
 
@@ -66,7 +64,7 @@ public class ProductTypeController {
      * @return 新增结果
      */
     @PostMapping
-    public ResultUtils insert(@RequestBody ProductType productType) {
+    public ResultUtils insert(@RequestBody ProductTypePO productType) {
         return ResultUtils.success(this.productTypeService.save(productType));
     }
 
@@ -77,7 +75,7 @@ public class ProductTypeController {
      * @return 修改结果
      */
     @PutMapping
-    public ResultUtils update(@RequestBody ProductType productType) {
+    public ResultUtils update(@RequestBody ProductTypePO productType) {
         return ResultUtils.success(this.productTypeService.updateById(productType));
     }
 
