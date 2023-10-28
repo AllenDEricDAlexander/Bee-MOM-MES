@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.manufature_model.dao.ReportWorkDao">
+
+    <resultMap type="top.atluofu.manufacture_model.po.ReportWorkPO" id="ReportWorkPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="reportWorkType" column="report_work_type" jdbcType="VARCHAR"/>
+        <result property="workCenterNo" column="work_center_no" jdbcType="VARCHAR"/>
+        <result property="productionLineNo" column="production_line_no" jdbcType="VARCHAR"/>
+        <result property="workshopNo" column="workshop_no" jdbcType="VARCHAR"/>
+        <result property="departmentId" column="department_id" jdbcType="VARCHAR"/>
+        <result property="productionOrderNo" column="production_order_no" jdbcType="VARCHAR"/>
+        <result property="consumerNo" column="consumer_no" jdbcType="VARCHAR"/>
+        <result property="productNo" column="product_no" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="specification" column="specification" jdbcType="VARCHAR"/>
+        <result property="executionUnitNo" column="execution_unit_no" jdbcType="VARCHAR"/>
+        <result property="reportTime" column="report_time" jdbcType="TIMESTAMP"/>
+        <result property="userNo" column="user_no" jdbcType="VARCHAR"/>
+        <result property="enableStatus" column="enable_status" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into manufacture_module.report_work(report_work_type, work_center_no, production_line_no, workshop_no,
+        department_id, production_order_no, consumer_no, product_no, product_name, specification, execution_unit_no,
+        report_time, user_no, enable_status, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.reportWorkType}, #{entity.workCenterNo}, #{entity.productionLineNo},
+            #{entity.workshopNo}, #{entity.departmentId}, #{entity.productionOrderNo}, #{entity.consumerNo},
+            #{entity.productNo}, #{entity.productName}, #{entity.specification}, #{entity.executionUnitNo},
+            #{entity.reportTime}, #{entity.userNo}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into manufacture_module.report_work(report_work_type, work_center_no, production_line_no, workshop_no,
+        department_id, production_order_no, consumer_no, product_no, product_name, specification, execution_unit_no,
+        report_time, user_no, enable_status, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.reportWorkType}, #{entity.workCenterNo}, #{entity.productionLineNo},
+            #{entity.workshopNo}, #{entity.departmentId}, #{entity.productionOrderNo}, #{entity.consumerNo},
+            #{entity.productNo}, #{entity.productName}, #{entity.specification}, #{entity.executionUnitNo},
+            #{entity.reportTime}, #{entity.userNo}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        report_work_type = values(report_work_type) , work_center_no = values(work_center_no) , production_line_no =
+        values(production_line_no) , workshop_no = values(workshop_no) , department_id = values(department_id) ,
+        production_order_no = values(production_order_no) , consumer_no = values(consumer_no) , product_no =
+        values(product_no) , product_name = values(product_name) , specification = values(specification) ,
+        execution_unit_no = values(execution_unit_no) , report_time = values(report_time) , user_no = values(user_no) ,
+        enable_status = values(enable_status) , remark_info = values(remark_info) , deleted = values(deleted) ,
+        create_time = values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.manufature_model.dao.ProductionExceptionDao">
+
+    <resultMap type="top.atluofu.manufacture_model.po.ProductionExceptionPO" id="ProductionExceptionPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="productionExceptionNo" column="production_exception_no" jdbcType="VARCHAR"/>
+        <result property="productionExceptionName" column="production_exception_name" jdbcType="VARCHAR"/>
+        <result property="productionExceptionTypeNo" column="production_exception_type_no" jdbcType="INTEGER"/>
+        <result property="productionOrderNo" column="production_order_no" jdbcType="VARCHAR"/>
+        <result property="workCenterNo" column="work_center_no" jdbcType="VARCHAR"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into manufacture_module.production_exception(production_exception_no, production_exception_name,
+        production_exception_type_no, production_order_no, work_center_no, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.productionExceptionNo}, #{entity.productionExceptionName},
+            #{entity.productionExceptionTypeNo}, #{entity.productionOrderNo}, #{entity.workCenterNo},
+            #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into manufacture_module.production_exception(production_exception_no, production_exception_name,
+        production_exception_type_no, production_order_no, work_center_no, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.productionExceptionNo}, #{entity.productionExceptionName},
+            #{entity.productionExceptionTypeNo}, #{entity.productionOrderNo}, #{entity.workCenterNo},
+            #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        production_exception_no = values(production_exception_no) , production_exception_name =
+        values(production_exception_name) , production_exception_type_no = values(production_exception_type_no) ,
+        production_order_no = values(production_order_no) , work_center_no = values(work_center_no) , remark_info =
+        values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time =
+        values(update_time)
+    </insert>
+
+</mapper>
+

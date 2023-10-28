@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.manufature_model.dao.ManufactureDispatcheDao">
+
+    <resultMap type="top.atluofu.manufacture_model.po.ManufactureDispatchePO" id="ManufactureDispatchePOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="manufactureDispatcheNo" column="manufacture_dispatche_no" jdbcType="VARCHAR"/>
+        <result property="productionOrderNo" column="production_order_no" jdbcType="VARCHAR"/>
+        <result property="technologyNo" column="technology_no" jdbcType="VARCHAR"/>
+        <result property="processNo" column="process_no" jdbcType="VARCHAR"/>
+        <result property="productionLineNo" column="production_line_no" jdbcType="VARCHAR"/>
+        <result property="workCenterNo" column="work_center_no" jdbcType="VARCHAR"/>
+        <result property="executionUnitNo" column="execution_unit_no" jdbcType="VARCHAR"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+        <result property="closingTime" column="closing_time" jdbcType="TIMESTAMP"/>
+        <result property="enableStatus" column="enable_status" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into manufacture_module.manufacture_dispatche(manufacture_dispatche_no, production_order_no,
+        technology_no, process_no, production_line_no, work_center_no, execution_unit_no, start_time, closing_time,
+        enable_status, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.manufactureDispatcheNo}, #{entity.productionOrderNo}, #{entity.technologyNo},
+            #{entity.processNo}, #{entity.productionLineNo}, #{entity.workCenterNo}, #{entity.executionUnitNo},
+            #{entity.startTime}, #{entity.closingTime}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into manufacture_module.manufacture_dispatche(manufacture_dispatche_no, production_order_no,
+        technology_no, process_no, production_line_no, work_center_no, execution_unit_no, start_time, closing_time,
+        enable_status, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.manufactureDispatcheNo}, #{entity.productionOrderNo}, #{entity.technologyNo},
+            #{entity.processNo}, #{entity.productionLineNo}, #{entity.workCenterNo}, #{entity.executionUnitNo},
+            #{entity.startTime}, #{entity.closingTime}, #{entity.enableStatus}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        manufacture_dispatche_no = values(manufacture_dispatche_no) , production_order_no = values(production_order_no)
+        , technology_no = values(technology_no) , process_no = values(process_no) , production_line_no =
+        values(production_line_no) , work_center_no = values(work_center_no) , execution_unit_no =
+        values(execution_unit_no) , start_time = values(start_time) , closing_time = values(closing_time) ,
+        enable_status = values(enable_status) , remark_info = values(remark_info) , deleted = values(deleted) ,
+        create_time = values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+
