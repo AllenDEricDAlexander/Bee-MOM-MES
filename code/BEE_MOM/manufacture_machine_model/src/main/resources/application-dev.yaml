@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/manufacture_machine_model?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: MQa12345
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: top.atluofu.**.controller
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+mybatis-plus:
+  mapper-locations: classpath*:resources/mapper/*.xml
+  type-aliases-package: top.atluofu.**.dao
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+logging:
+  file:
+    path: G:/log/${spring.application.name}
+  config: classpath:log/logback-spring.xml
+  level:
+    root: info

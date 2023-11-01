@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.manufacture_machine_model.dao.EquipmentFailureInfoDao">
+
+    <resultMap type="top.atluofu.manufacture_machine_model.po.EquipmentFailureInfoPO" id="EquipmentFailureInfoPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="equipmentFailureNo" column="equipment_failure_no" jdbcType="VARCHAR"/>
+        <result property="equipmentFailureTypeNo" column="equipment_failure_type_no" jdbcType="VARCHAR"/>
+        <result property="manufactureMachineNo" column="manufacture_machine_no" jdbcType="VARCHAR"/>
+        <result property="headerNo" column="header_no" jdbcType="VARCHAR"/>
+        <result property="repairTypeNo" column="repair_type_no" jdbcType="VARCHAR"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+        <result property="enableState" column="enable_state" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into manufacture_machine_model.equipment_failure_info(equipment_failure_no, equipment_failure_type_no,
+        manufacture_machine_no, header_no, repair_type_no, start_time, end_time, enable_state, remark_info, deleted,
+        create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.equipmentFailureNo}, #{entity.equipmentFailureTypeNo},
+            #{entity.manufactureMachineNo}, #{entity.headerNo}, #{entity.repairTypeNo}, #{entity.startTime},
+            #{entity.endTime}, #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime},
+            #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into manufacture_machine_model.equipment_failure_info(equipment_failure_no, equipment_failure_type_no,
+        manufacture_machine_no, header_no, repair_type_no, start_time, end_time, enable_state, remark_info, deleted,
+        create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.equipmentFailureNo}, #{entity.equipmentFailureTypeNo},
+            #{entity.manufactureMachineNo}, #{entity.headerNo}, #{entity.repairTypeNo}, #{entity.startTime},
+            #{entity.endTime}, #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime},
+            #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        equipment_failure_no = values(equipment_failure_no) , equipment_failure_type_no =
+        values(equipment_failure_type_no) , manufacture_machine_no = values(manufacture_machine_no) , header_no =
+        values(header_no) , repair_type_no = values(repair_type_no) , start_time = values(start_time) , end_time =
+        values(end_time) , enable_state = values(enable_state) , remark_info = values(remark_info) , deleted =
+        values(deleted) , create_time = values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

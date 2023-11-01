@@ -19,6 +19,7 @@
         <module>master_data</module>
         <module>manufacture_module</module>
         <module>manufacture_technology_model</module>
+        <module>manufacture_machine_model</module>
     </modules>
     <properties>
         <java.version>17</java.version>
