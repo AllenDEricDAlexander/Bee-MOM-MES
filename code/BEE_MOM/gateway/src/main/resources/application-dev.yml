@@ -10,7 +10,7 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: masterData
-          uri: http://127.0.0.1:8081
+          uri: lb://masterData
           predicates:
             - Path=/masterData/**
           filters:
@@ -18,18 +18,17 @@ spring:
         - id: manufactureMachineModel
           uri: lb://manufactureMachineModel
           predicates:
-            - Path=/machine/**
+            - Path=/manufactureMachineModel/**
           filters:
             - StripPrefix=1
-#            - RewritePath=/machine/(?<segment>.*), /$\{segment}
         - id: manufactureModel
-          uri: http://127.0.0.1:8083
+          uri: lb://manufactureModel
           predicates:
-            - Path=/manufactureModel/**
-#          filters:
-#            - StripPrefix=1
-        - id: manufacture_technology_model
-          uri: http://127.0.0.1:8082
+            - Path= /manufactureModel/**
+          filters:
+            - StripPrefix=1
+        - id: manufactureTechnologyModel
+          uri: lb://manufactureTechnologyModel
           predicates:
             - Path=/technology/**
           filters:
