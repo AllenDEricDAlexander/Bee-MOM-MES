@@ -16,15 +16,16 @@ springdoc:
   group-configs:
     - group: 'default'
       paths-to-match: '/**'
-      packages-to-scan: top.atluofu.**.controller
+      packages-to-scan: top.atluofu.master_data.controller
+  default-flat-param-object: true
 knife4j:
-  enable: true
+  enable: false
   setting:
     language: zh_cn
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml
-  type-aliases-package: top.atluofu.**.dao
+  type-aliases-package: top.atluofu.master_data.dao
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 

@@ -27,6 +27,10 @@ Industrial Digital Architecture Project.About MOM/MES system, industrial big dat
 
 一个月准备前端，ddl：2024-5-6。
 
+#### 详细工作边界
+
+进行中
+
 ### 1.毕设文档
 
 毕设的过程文档，包括开题、中期答辩等报告文档，

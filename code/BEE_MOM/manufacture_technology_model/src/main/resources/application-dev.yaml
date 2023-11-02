@@ -17,8 +17,9 @@ springdoc:
     - group: 'default'
       paths-to-match: '/**'
       packages-to-scan: top.atluofu.**.controller
+  default-flat-param-object: true
 knife4j:
-  enable: true
+  enable: false
   setting:
     language: zh_cn
 
