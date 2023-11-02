@@ -1,0 +1,49 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: masterData
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/masterData/**
+          filters:
+            - StripPrefix=1
+        - id: manufactureMachineModel
+          uri: lb://manufactureMachineModel
+          predicates:
+            - Path=/machine/**
+          filters:
+            - StripPrefix=1
+#            - RewritePath=/machine/(?<segment>.*), /$\{segment}
+        - id: manufactureModel
+          uri: http://127.0.0.1:8083
+          predicates:
+            - Path=/manufactureModel/**
+#          filters:
+#            - StripPrefix=1
+        - id: manufacture_technology_model
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/technology/**
+          filters:
+            - StripPrefix=1
+
+#yml配置
+logging:
+  file:
+    path: /log/${spring.application.name}
+  config: classpath:log/logback-spring.xml
+  level:
+    root: info
+    org:
+      springframework:
+        cloud:
+          gateway: info
+

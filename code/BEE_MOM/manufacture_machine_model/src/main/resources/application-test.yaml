@@ -27,7 +27,7 @@ springdoc:
       packages-to-scan: top.atluofu.manufacture_machine_model
   default-flat-param-object: true
 knife4j:
-  enable: false
+  enable: true
   setting:
     language: zh_cn
 

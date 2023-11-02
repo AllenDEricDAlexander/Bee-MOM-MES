@@ -1,3 +1,7 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /manufactureModel
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

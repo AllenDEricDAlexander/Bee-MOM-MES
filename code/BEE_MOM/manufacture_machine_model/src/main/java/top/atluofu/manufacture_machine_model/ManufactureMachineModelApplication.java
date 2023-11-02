@@ -23,7 +23,7 @@ import java.net.InetAddress;
 @EnableDiscoveryClient
 @SpringBootApplication
 @MapperScan(basePackages = "top.atluofu.manufacture_machine_model.dao")
-@ComponentScan(basePackages   = {"top.atluofu.manufacture_machine_model","top.atluofu.common"})
+@ComponentScan(basePackages = {"top.atluofu.manufacture_machine_model", "top.atluofu.common"})
 public class ManufactureMachineModelApplication {
     @SneakyThrows
     public static void main(String[] args) {
@@ -31,13 +31,13 @@ public class ManufactureMachineModelApplication {
         Environment env = application.getEnvironment();
         log.info(
                 """
-                \t\t\n----------------------------------------------------------\n\t
-                Application '{}' is running! Access URLs:\n\t
-                Local: \t\thttp://localhost:{}\n\t
-                External: \thttp://{}:{}\n\t
-                Doc: \thttp://{}:{}/doc.html\n
-                ----------------------------------------------------------
-                """,
+                        \t\t\n----------------------------------------------------------\n\t
+                        Application '{}' is running! Access URLs:\n\t
+                        Local: \t\thttp://localhost:{}\n\t
+                        External: \thttp://{}:{}\n\t
+                        Doc: \thttp://{}:{}/doc.html\n
+                        ----------------------------------------------------------
+                        """,
                 env.getProperty("spring.application.name"),
                 env.getProperty("server.port"),
                 InetAddress.getLocalHost().getHostAddress(),
