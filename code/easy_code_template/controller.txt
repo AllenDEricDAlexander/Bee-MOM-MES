@@ -18,6 +18,7 @@ $!{define.vm}
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import $!{tableInfo.savePackageName}.po.$!{tableInfo.name}PO;
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ import java.util.List;
 
 ##表注释（宏定义）
 #tableComment("表控制层")
-@Api(tags = "$!{tableName}模块")
+@Tag(name = "$!{tableName}模块")
 @RestController
 @Slf4j
 @Validated
