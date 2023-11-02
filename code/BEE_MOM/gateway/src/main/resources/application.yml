@@ -1,0 +1,35 @@
+spring:
+  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: http://127.0.0.1:8081
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: master_data_application
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/masterData/**
+        - id: manufacture_machine_model_application
+          uri: http://127.0.0.1:8084
+          predicates:
+            - Path=/machine/**
+        - id: manufacture_model_application
+          uri: http://127.0.0.1:8083
+          predicates:
+            - Path=/manufacture/**
+        - id: manufacture_technology_model_application
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/technology/**
+
+#yml配置
+logging:
+  file:
+    path: /log/${spring.application.name}
+  config: classpath:log/logback-spring.xml
+  level:
+    root: info
+

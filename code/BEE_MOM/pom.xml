@@ -20,6 +20,7 @@
         <module>manufacture_module</module>
         <module>manufacture_technology_model</module>
         <module>manufacture_machine_model</module>
+        <module>gateway</module>
     </modules>
     <properties>
         <java.version>17</java.version>
