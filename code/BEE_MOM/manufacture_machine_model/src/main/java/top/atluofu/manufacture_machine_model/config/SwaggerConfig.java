@@ -1,56 +1,53 @@
 package top.atluofu.manufacture_machine_model.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.ArrayList;
 
 /**
  * @ClassName: SwaggerConfig
  * @description: TODO
  * @author: 有罗敷的马同学
- * @datetime: 2023Year-11Month-02Day-8:47
+ * @datetime: 2023Year-11Month-02Day-12:24
  * @Version: 1.0
  */
-//@Profile({"dev","test"})
 @Configuration
-@EnableSwagger2
 public class SwaggerConfig {
+    /**
+     * 根据@Tag 上的排序，写入x-order
+     *
+     * @return the global open api customizer
+     */
+//    @Bean
+//    public GlobalOpenApiCustomizer orderGlobalOpenApiCustomizer() {
+//        return openApi -> {
+//            if (openApi.getTags()!=null){
+//                openApi.getTags().forEach(tag -> {
+//                    Map<String,Object> map=new HashMap<>();
+//                    map.put("x-order", RandomUtil.randomInt(0,100));
+//                    tag.setExtensions(map);
+//                });
+//            }
+//            if(openApi.getPaths()!=null){
+//                openApi.addExtension("x-test123","333");
+//                openApi.getPaths().addExtension("x-abb",RandomUtil.randomInt(1,100));
+//            }
+//
+//        };
+//    }
+
     @Bean
-    public Docket docker(){
-        // 构造函数传入初始化规范，这是swagger2规范
-        return new Docket(DocumentationType.SWAGGER_2)
-                //apiInfo： 添加api详情信息，参数为ApiInfo类型的参数，这个参数包含了第二部分的所有信息比如标题、描述、版本之类的，开发中一般都会自定义这些信息
-                .apiInfo(apiInfo())
-                .groupName("manufacture_machine_model")
-                //配置是否启用Swagger，如果是false，在浏览器将无法访问，默认是true
-                .enable(true)
-                .select()
-                //apis： 添加过滤条件,
-                .apis(RequestHandlerSelectors.basePackage("top.atluofu.manufacture_machine_model.controller"))
-                //paths： 这里是控制哪些路径的api会被显示出来，比如下方的参数就是除了/user以外的其它路径都会生成api文档
-                .paths(PathSelectors.any())
-                .build();
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("MOM系统API")
+                        .version("1.0")
+                        .description( "Knife4j集成springdoc-openapi示例")
+                        .termsOfService("https://atluofu.top")
+                        .license(new License().name("Apache 2.0")
+                                .url("https://atluofu.top")));
     }
 
-    private ApiInfo apiInfo(){
-        Contact contact = new Contact("名字：atluofu", "个人链接：https://atluofu.top/", "邮箱：mqa010225@163.com");
-        return new ApiInfo(
-                "manufacture_machine_model",
-                "manufacture_machine_model",
-                "manufacture_machine_model：v1.0",
-                "链接：https://atluofu.top",
-                contact,
-                "许可：GPL 3.0 ",
-                "许可链接：atluofu.top",
-                new ArrayList<>()
-        );
-    }
 }

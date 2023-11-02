@@ -1,6 +1,12 @@
 server:
   port: 8084
+  servlet:
+    context-path: /
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/manufacture_machine_model?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
@@ -12,7 +18,7 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     tags-sorter: alpha
-    operations-sorter: alpha
+    operations-sorter: order
   api-docs:
     path: /v3/api-docs
   group-configs:
@@ -27,7 +33,7 @@ knife4j:
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml
-  type-aliases-package: top.atluofu.**.dao
+  type-aliases-package: top.atluofu.manufacture_machine_model.dao
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 

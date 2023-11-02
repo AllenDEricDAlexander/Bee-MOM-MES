@@ -27,7 +27,7 @@ knife4j:
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml
-  type-aliases-package: top.atluofu.**.dao
+  type-aliases-package: top.atluofu.manufacture_machine_model.dao
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
