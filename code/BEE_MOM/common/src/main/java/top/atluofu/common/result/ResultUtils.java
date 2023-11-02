@@ -22,6 +22,9 @@ public class ResultUtils<T> implements Serializable {
     public static <T> ResultUtils<T> success(T res) {
         return new ResultUtils<T>(200, "ok", res);
     }
+    public static <T> ResultUtils<T> error(Integer code,T res) {
+        return new ResultUtils<T>(code, "ok", res);
+    }
 
     public static <T> ResultUtils<T> result(Integer code, String message, T res) {
         return new ResultUtils<T>(code, message, res);

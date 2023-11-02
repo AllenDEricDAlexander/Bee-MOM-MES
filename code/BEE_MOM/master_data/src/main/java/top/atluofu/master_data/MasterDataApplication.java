@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
@@ -20,6 +21,7 @@ import java.net.InetAddress;
 @SpringBootApplication
 @Slf4j
 @MapperScan(basePackages = "top.atluofu.master_data.dao")
+@ComponentScan(basePackages   = {"top.atluofu.master_data","top.atluofu.common"})
 public class MasterDataApplication {
     @SneakyThrows
     public static void main(String[] args) {
