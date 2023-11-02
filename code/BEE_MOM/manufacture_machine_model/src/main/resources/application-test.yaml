@@ -39,7 +39,7 @@ mybatis-plus:
 
 logging:
   file:
-    path: G:/log/${spring.application.name}
+    path: /log/${spring.application.name}
   config: classpath:log/logback-spring.xml
   level:
     root: info
