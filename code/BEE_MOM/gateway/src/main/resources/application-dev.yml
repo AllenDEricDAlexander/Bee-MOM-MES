@@ -10,7 +10,8 @@ spring:
           lowerCaseServiceId: true
       routes:
         - id: masterData
-          uri: lb://masterData
+#          uri: lb://masterData
+          uri: http://localhost:8081
           predicates:
             - Path=/masterData/**
           filters:
