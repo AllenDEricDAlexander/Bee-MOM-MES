@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -19,8 +21,9 @@ import java.net.InetAddress;
  * @Version: 1.0
  */
 @Slf4j
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
+@EnableFeignClients
 @MapperScan(basePackages = "top.atluofu.manufacture_model.dao")
 @ComponentScan(basePackages   = {"top.atluofu.manufacture_model","top.atluofu.common"})
 public class ManufactureModelApplication {
