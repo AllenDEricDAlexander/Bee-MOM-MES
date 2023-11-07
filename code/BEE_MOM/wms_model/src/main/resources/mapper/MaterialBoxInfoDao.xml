@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.wms_model.dao.MaterialBoxInfoDao">
+
+    <resultMap type="top.atluofu.wms_model.po.MaterialBoxInfoPO" id="MaterialBoxInfoPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="materialBoxNo" column="material_box_no" jdbcType="VARCHAR"/>
+        <result property="materialBoxName" column="material_box_name" jdbcType="VARCHAR"/>
+        <result property="materialBoxType" column="material_box_type" jdbcType="VARCHAR"/>
+        <result property="materialBoxLocation" column="material_box_location" jdbcType="VARCHAR"/>
+        <result property="chargePersonNo" column="charge_person_no" jdbcType="VARCHAR"/>
+        <result property="enableState" column="enable_state" jdbcType="INTEGER"/>
+        <result property="enableNum" column="enable_num" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into wms_model.material_box_info(material_box_no, material_box_name, material_box_type,
+        material_box_location, charge_person_no, enable_state, enable_num, amount, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.materialBoxNo}, #{entity.materialBoxName}, #{entity.materialBoxType},
+            #{entity.materialBoxLocation}, #{entity.chargePersonNo}, #{entity.enableState}, #{entity.enableNum},
+            #{entity.amount}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into wms_model.material_box_info(material_box_no, material_box_name, material_box_type,
+        material_box_location, charge_person_no, enable_state, enable_num, amount, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.materialBoxNo}, #{entity.materialBoxName}, #{entity.materialBoxType},
+            #{entity.materialBoxLocation}, #{entity.chargePersonNo}, #{entity.enableState}, #{entity.enableNum},
+            #{entity.amount}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        material_box_no = values(material_box_no) , material_box_name = values(material_box_name) , material_box_type =
+        values(material_box_type) , material_box_location = values(material_box_location) , charge_person_no =
+        values(charge_person_no) , enable_state = values(enable_state) , enable_num = values(enable_num) , amount =
+        values(amount) , remark_info = values(remark_info) , deleted = values(deleted) , create_time =
+        values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

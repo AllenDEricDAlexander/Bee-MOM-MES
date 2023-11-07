@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.wms_model.dao.MaterialDistributionInfoDao">
+
+    <resultMap type="top.atluofu.wms_model.po.MaterialDistributionInfoPO" id="MaterialDistributionInfoPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="materialDistributionNo" column="material_distribution_no" jdbcType="VARCHAR"/>
+        <result property="materialDistributionName" column="material_distribution_name" jdbcType="VARCHAR"/>
+        <result property="materialDistributionLocation" column="material_distribution_location" jdbcType="VARCHAR"/>
+        <result property="materialNo" column="material_no" jdbcType="VARCHAR"/>
+        <result property="workEquipmentNo" column="work_equipment_no" jdbcType="VARCHAR"/>
+        <result property="enableState" column="enable_state" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into wms_model.material_distribution_info(material_distribution_no, material_distribution_name,
+        material_distribution_location, material_no, work_equipment_no, enable_state, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.materialDistributionNo}, #{entity.materialDistributionName},
+            #{entity.materialDistributionLocation}, #{entity.materialNo}, #{entity.workEquipmentNo},
+            #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into wms_model.material_distribution_info(material_distribution_no, material_distribution_name,
+        material_distribution_location, material_no, work_equipment_no, enable_state, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.materialDistributionNo}, #{entity.materialDistributionName},
+            #{entity.materialDistributionLocation}, #{entity.materialNo}, #{entity.workEquipmentNo},
+            #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        material_distribution_no = values(material_distribution_no) , material_distribution_name =
+        values(material_distribution_name) , material_distribution_location = values(material_distribution_location) ,
+        material_no = values(material_no) , work_equipment_no = values(work_equipment_no) , enable_state =
+        values(enable_state) , remark_info = values(remark_info) , deleted = values(deleted) , create_time =
+        values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

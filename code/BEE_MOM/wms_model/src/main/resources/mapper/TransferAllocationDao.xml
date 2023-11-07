@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.wms_model.dao.TransferAllocationDao">
+
+    <resultMap type="top.atluofu.wms_model.po.TransferAllocationPO" id="TransferAllocationPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="transferAllocationNo" column="transfer_allocation_no" jdbcType="VARCHAR"/>
+        <result property="transferAllocationName" column="transfer_allocation_name" jdbcType="VARCHAR"/>
+        <result property="fromLocation" column="from_location" jdbcType="VARCHAR"/>
+        <result property="toLocation" column="to_location" jdbcType="VARCHAR"/>
+        <result property="chargePersonNo" column="charge_person_no" jdbcType="VARCHAR"/>
+        <result property="inspectorNo" column="inspector_no" jdbcType="VARCHAR"/>
+        <result property="approvalState" column="approval_state" jdbcType="INTEGER"/>
+        <result property="quantity" column="quantity" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into wms_model.transfer_allocation(transfer_allocation_no, transfer_allocation_name, from_location,
+        to_location, charge_person_no, inspector_no, approval_state, quantity, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.transferAllocationNo}, #{entity.transferAllocationName}, #{entity.fromLocation},
+            #{entity.toLocation}, #{entity.chargePersonNo}, #{entity.inspectorNo}, #{entity.approvalState},
+            #{entity.quantity}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into wms_model.transfer_allocation(transfer_allocation_no, transfer_allocation_name, from_location,
+        to_location, charge_person_no, inspector_no, approval_state, quantity, remark_info, deleted, create_time,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.transferAllocationNo}, #{entity.transferAllocationName}, #{entity.fromLocation},
+            #{entity.toLocation}, #{entity.chargePersonNo}, #{entity.inspectorNo}, #{entity.approvalState},
+            #{entity.quantity}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        transfer_allocation_no = values(transfer_allocation_no) , transfer_allocation_name =
+        values(transfer_allocation_name) , from_location = values(from_location) , to_location = values(to_location) ,
+        charge_person_no = values(charge_person_no) , inspector_no = values(inspector_no) , approval_state =
+        values(approval_state) , quantity = values(quantity) , remark_info = values(remark_info) , deleted =
+        values(deleted) , create_time = values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

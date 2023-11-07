@@ -1,0 +1,58 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wms_model?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: MQa12345
+# feign configuration
+feign:
+  httpclient:
+    enabled: true
+    hc5:
+      enabled: false
+    disable-ssl-validation: false # 禁用 SSL 验证
+    max-connections: 200 # 最大连接
+    max-connections-per-route: 50 # 路由最大连接数
+    time-to-live: 900 # 连接存活时间
+    time-to-live-unit: seconds # 连接存活时间单位
+    follow-redirects: true # 重定向
+    connection-timeout: 2000 # 连接超时
+    connection-timer-repeat: 3000 # 连接重复间隔
+  okhttp:
+    enabled: false
+
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: top.atluofu.wms_model.controller
+  default-flat-param-object: true
+knife4j:
+  enable: false
+  setting:
+    language: zh_cn
+
+mybatis-plus:
+  mapper-locations: classpath*:resources/mapper/*.xml
+  type-aliases-package: top.atluofu.wms_model.dao
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+logging:
+  file:
+    path: /log/${spring.application.name}
+  config: classpath:log/logback-spring.xml
+  level:
+    root: info
