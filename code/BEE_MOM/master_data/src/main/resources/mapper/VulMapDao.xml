@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.master_data.dao.VulMapDao">
+
+    <resultMap type="top.atluofu.master_data.po.VulMapPO" id="VulMapPOMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="vulName" column="VUL_NAME" jdbcType="VARCHAR"/>
+        <result property="vulTypeName" column="VUL_TYPE_NAME" jdbcType="VARCHAR"/>
+        <result property="vulRisk" column="VUL_RISK" jdbcType="VARCHAR"/>
+        <result property="vulState" column="VUL_STATE" jdbcType="VARCHAR"/>
+        <result property="createDate" column="CREATE_DATE" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="UPDATE_DATE" jdbcType="TIMESTAMP"/>
+        <result property="delFlag" column="DEL_FLAG" jdbcType="INTEGER"/>
+        <result property="tenantId" column="TENANT_ID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into demo.vul_map(VUL_NAME, VUL_TYPE_NAME, VUL_RISK, VUL_STATE, CREATE_DATE, UPDATE_DATE, DEL_FLAG,
+        TENANT_ID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.vulName}, #{entity.vulTypeName}, #{entity.vulRisk}, #{entity.vulState},
+            #{entity.createDate}, #{entity.updateDate}, #{entity.delFlag}, #{entity.tenantId})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into demo.vul_map(VUL_NAME, VUL_TYPE_NAME, VUL_RISK, VUL_STATE, CREATE_DATE, UPDATE_DATE, DEL_FLAG,
+        TENANT_ID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.vulName}, #{entity.vulTypeName}, #{entity.vulRisk}, #{entity.vulState},
+            #{entity.createDate}, #{entity.updateDate}, #{entity.delFlag}, #{entity.tenantId})
+        </foreach>
+        on duplicate key update
+        VUL_NAME = values(VUL_NAME) , VUL_TYPE_NAME = values(VUL_TYPE_NAME) , VUL_RISK = values(VUL_RISK) , VUL_STATE =
+        values(VUL_STATE) , CREATE_DATE = values(CREATE_DATE) , UPDATE_DATE = values(UPDATE_DATE) , DEL_FLAG =
+        values(DEL_FLAG) , TENANT_ID = values(TENANT_ID)
+    </insert>
+
+</mapper>
+

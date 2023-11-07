@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.master_data.dao.VulMapAssetDao">
+
+    <resultMap type="top.atluofu.master_data.po.VulMapAssetPO" id="VulMapAssetPOMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="assetId" column="ASSET_ID" jdbcType="INTEGER"/>
+        <result property="vulMapId" column="VUL_MAP_ID" jdbcType="INTEGER"/>
+        <result property="createDate" column="CREATE_DATE" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="UPDATE_DATE" jdbcType="TIMESTAMP"/>
+        <result property="delFlag" column="DEL_FLAG" jdbcType="INTEGER"/>
+        <result property="tenantId" column="TENANT_ID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into demo.vul_map_asset(ASSET_ID, VUL_MAP_ID, CREATE_DATE, UPDATE_DATE, DEL_FLAG, TENANT_ID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.assetId}, #{entity.vulMapId}, #{entity.createDate}, #{entity.updateDate},
+            #{entity.delFlag}, #{entity.tenantId})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into demo.vul_map_asset(ASSET_ID, VUL_MAP_ID, CREATE_DATE, UPDATE_DATE, DEL_FLAG, TENANT_ID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.assetId}, #{entity.vulMapId}, #{entity.createDate}, #{entity.updateDate},
+            #{entity.delFlag}, #{entity.tenantId})
+        </foreach>
+        on duplicate key update
+        ASSET_ID = values(ASSET_ID) , VUL_MAP_ID = values(VUL_MAP_ID) , CREATE_DATE = values(CREATE_DATE) , UPDATE_DATE
+        = values(UPDATE_DATE) , DEL_FLAG = values(DEL_FLAG) , TENANT_ID = values(TENANT_ID)
+    </insert>
+
+</mapper>
+
