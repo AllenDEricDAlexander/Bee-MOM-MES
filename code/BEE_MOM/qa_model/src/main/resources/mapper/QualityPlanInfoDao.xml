@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.qa_model.dao.QualityPlanInfoDao">
+
+    <resultMap type="top.atluofu.qa_model.po.QualityPlanInfoPO" id="QualityPlanInfoPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="qualityPlanNo" column="quality_plan_no" jdbcType="VARCHAR"/>
+        <result property="qualityPlanName" column="quality_plan_name" jdbcType="VARCHAR"/>
+        <result property="qualityPlanDescription" column="quality_plan_description" jdbcType="VARCHAR"/>
+        <result property="chargePersonNo" column="charge_person_no" jdbcType="VARCHAR"/>
+        <result property="enableState" column="enable_state" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into quality_module.quality_plan_info(quality_plan_no, quality_plan_name, quality_plan_description,
+        charge_person_no, enable_state, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.qualityPlanNo}, #{entity.qualityPlanName}, #{entity.qualityPlanDescription},
+            #{entity.chargePersonNo}, #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into quality_module.quality_plan_info(quality_plan_no, quality_plan_name, quality_plan_description,
+        charge_person_no, enable_state, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.qualityPlanNo}, #{entity.qualityPlanName}, #{entity.qualityPlanDescription},
+            #{entity.chargePersonNo}, #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        quality_plan_no = values(quality_plan_no) , quality_plan_name = values(quality_plan_name) ,
+        quality_plan_description = values(quality_plan_description) , charge_person_no = values(charge_person_no) ,
+        enable_state = values(enable_state) , remark_info = values(remark_info) , deleted = values(deleted) ,
+        create_time = values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.qa_model.dao.CertificateManagementDao">
+
+    <resultMap type="top.atluofu.qa_model.po.CertificateManagementPO" id="CertificateManagementPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="certificateNo" column="certificate_no" jdbcType="VARCHAR"/>
+        <result property="certificateName" column="certificate_name" jdbcType="VARCHAR"/>
+        <result property="certificateType" column="certificate_type" jdbcType="VARCHAR"/>
+        <result property="qualityInspectorNo" column="quality_inspector_no" jdbcType="VARCHAR"/>
+        <result property="chargePersonNo" column="charge_person_no" jdbcType="VARCHAR"/>
+        <result property="productInfoNo" column="product_info_no" jdbcType="VARCHAR"/>
+        <result property="certificateMessage" column="certificate_message" jdbcType="VARCHAR"/>
+        <result property="enableState" column="enable_state" jdbcType="INTEGER"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into quality_module.certificate_management(certificate_no, certificate_name, certificate_type,
+        quality_inspector_no, charge_person_no, product_info_no, certificate_message, enable_state, remark_info,
+        deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.certificateNo}, #{entity.certificateName}, #{entity.certificateType},
+            #{entity.qualityInspectorNo}, #{entity.chargePersonNo}, #{entity.productInfoNo},
+            #{entity.certificateMessage}, #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into quality_module.certificate_management(certificate_no, certificate_name, certificate_type,
+        quality_inspector_no, charge_person_no, product_info_no, certificate_message, enable_state, remark_info,
+        deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.certificateNo}, #{entity.certificateName}, #{entity.certificateType},
+            #{entity.qualityInspectorNo}, #{entity.chargePersonNo}, #{entity.productInfoNo},
+            #{entity.certificateMessage}, #{entity.enableState}, #{entity.remarkInfo}, #{entity.deleted},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        certificate_no = values(certificate_no) , certificate_name = values(certificate_name) , certificate_type =
+        values(certificate_type) , quality_inspector_no = values(quality_inspector_no) , charge_person_no =
+        values(charge_person_no) , product_info_no = values(product_info_no) , certificate_message =
+        values(certificate_message) , enable_state = values(enable_state) , remark_info = values(remark_info) , deleted
+        = values(deleted) , create_time = values(create_time) , update_time = values(update_time)
+    </insert>
+
+</mapper>
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.atluofu.qa_model.dao.EntranceInspectionRecordFormDao">
+
+    <resultMap type="top.atluofu.qa_model.po.EntranceInspectionRecordFormPO" id="EntranceInspectionRecordFormPOMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="entranceInspectionRecordNo" column="entrance_inspection_record_no" jdbcType="VARCHAR"/>
+        <result property="entranceInspectionRecordName" column="entrance_inspection_record_name" jdbcType="VARCHAR"/>
+        <result property="entranceInspectionRecordDescription" column="entrance_inspection_record_description"
+                jdbcType="VARCHAR"/>
+        <result property="productNo" column="product_no" jdbcType="VARCHAR"/>
+        <result property="chargePersonNo" column="charge_person_no" jdbcType="VARCHAR"/>
+        <result property="qualityInspectorNo" column="quality_inspector_no" jdbcType="VARCHAR"/>
+        <result property="remarkInfo" column="remark_info" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id">
+        insert into quality_module.entrance_inspection_record_form(entrance_inspection_record_no,
+        entrance_inspection_record_name, entrance_inspection_record_description, product_no, charge_person_no,
+        quality_inspector_no, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.entranceInspectionRecordNo}, #{entity.entranceInspectionRecordName},
+            #{entity.entranceInspectionRecordDescription}, #{entity.productNo}, #{entity.chargePersonNo},
+            #{entity.qualityInspectorNo}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime},
+            #{entity.updateTime})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id">
+        insert into quality_module.entrance_inspection_record_form(entrance_inspection_record_no,
+        entrance_inspection_record_name, entrance_inspection_record_description, product_no, charge_person_no,
+        quality_inspector_no, remark_info, deleted, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.entranceInspectionRecordNo}, #{entity.entranceInspectionRecordName},
+            #{entity.entranceInspectionRecordDescription}, #{entity.productNo}, #{entity.chargePersonNo},
+            #{entity.qualityInspectorNo}, #{entity.remarkInfo}, #{entity.deleted}, #{entity.createTime},
+            #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        entrance_inspection_record_no = values(entrance_inspection_record_no) , entrance_inspection_record_name =
+        values(entrance_inspection_record_name) , entrance_inspection_record_description =
+        values(entrance_inspection_record_description) , product_no = values(product_no) , charge_person_no =
+        values(charge_person_no) , quality_inspector_no = values(quality_inspector_no) , remark_info =
+        values(remark_info) , deleted = values(deleted) , create_time = values(create_time) , update_time =
+        values(update_time)
+    </insert>
+
+</mapper>
+
