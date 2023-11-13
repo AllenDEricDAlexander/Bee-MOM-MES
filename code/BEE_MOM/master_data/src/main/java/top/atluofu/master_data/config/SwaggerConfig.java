@@ -1,4 +1,4 @@
-package top.atluofu.manufacture_machine_model.config;
+package top.atluofu.master_data.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

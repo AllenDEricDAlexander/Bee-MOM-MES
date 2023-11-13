@@ -15,24 +15,9 @@ spring:
     restart:
       enabled: true
 
-# springdoc-openapi项目配置
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: alpha
-  api-docs:
-    path: /v3/api-docs
-  group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: top.atluofu.manufacture_model.controller
-  default-flat-param-object: true
-knife4j:
-  enable: false
-  setting:
-    language: zh_cn
-    swagger-model-name: "实体类"
+    path: /
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml

@@ -15,23 +15,10 @@ spring:
   devtools:
     restart:
       enabled: true
-# springdoc-openapi项目配置
+
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: alpha
-  api-docs:
-    path: /v3/api-docs
-  group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: top.atluofu.manufacture_machine_model
-  default-flat-param-object: true
-knife4j:
-  enable: true
-  setting:
-    language: zh_cn
+    path: /
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml
