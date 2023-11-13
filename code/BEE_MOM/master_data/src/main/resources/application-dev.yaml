@@ -34,7 +34,7 @@ springdoc:
     path: /
 
 mybatis-plus:
-  mapper-locations: classpath*:resources/mapper/*.xml
+  mapper-locations: classpath*:mapper/*.xml
   type-aliases-package: top.atluofu.master_data.dao
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl

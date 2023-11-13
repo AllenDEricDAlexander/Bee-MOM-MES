@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.atluofu.common.service.BaseServiceImpl;
 import top.atluofu.master_data.dao.SupplierDao;
+import top.atluofu.master_data.dto.SupplierListDTO;
 import top.atluofu.master_data.po.SupplierPO;
 import top.atluofu.master_data.query.SupplierQuery;
 import top.atluofu.master_data.service.SupplierService;
+
+import java.util.List;
 
 /**
  * (Supplier)表服务实现类
@@ -32,6 +35,12 @@ public class SupplierServiceImpl extends BaseServiceImpl<SupplierDao, SupplierPO
                 .ge(SupplierPO::getSupplierScore, supplier.getMinScore())
                 .gt(SupplierPO::getSupplierScore, supplier.getMaxScore());
         return baseMapper.selectPage(new Page<>(supplier.getPageNo(), supplier.getPageSize()), gt);
+    }
+
+    @Override
+    public List<SupplierListDTO> getAll(SupplierListDTO supplier) {
+        List<SupplierPO> supplierPOS = supplierDao.getAll(SupplierListDTO.toPO(supplier));
+        return SupplierListDTO.toDTOs(supplierPOS);
     }
 }
 

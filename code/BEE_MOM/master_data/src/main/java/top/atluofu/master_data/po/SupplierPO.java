@@ -1,10 +1,14 @@
 package top.atluofu.master_data.po;
 
 
-
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,65 +25,64 @@ import java.util.Date;
 @AllArgsConstructor
 @TableName("supplier")
 public class SupplierPO extends Model<SupplierPO> {
-        /**
-      * PK_id,非自增,业务填写
-      */  
-    
+    /**
+     * PK_id,非自增,业务填写
+     */
+    @TableId(value = "id")
     private Long id;
-        /**
-      * 格式0000-0000-0000-0000
-      */  
-    
+    /**
+     * 格式0000-0000-0000-0000
+     */
+
     private String supplierNo;
-        /**
-      * supplier name
-      */  
-    
+    /**
+     * supplier name
+     */
+
     private String supplierName;
-        /**
-      * short name
-      */  
-    
+    /**
+     * short name
+     */
+
     private String shortName;
-        /**
-      * grade
-      */  
-    
+    /**
+     * grade
+     */
+
     private Integer supplierGrade;
-        /**
-      * score
-      */  
-    
+    /**
+     * score
+     */
+
     private Integer supplierScore;
-        /**
-      * supplier_phone
-      */  
-    
+    /**
+     * supplier_phone
+     */
+
     private String supplierPhone;
-        /**
-      * enable status
-      */  
-    
+    /**
+     * enable status
+     */
+
     private Integer enableStatus;
-        /**
-      * 备注
-      */  
-    
+    /**
+     * 备注
+     */
+
     private String remarkInfo;
-        /**
-      * deleted
-      */  
-    
+    /**
+     * deleted
+     */
     private Integer deleted;
-        /**
-      * create time
-      */  
-    
+    /**
+     * create time
+     */
+
     private Date createTime;
-        /**
-      * update_time
-      */  
-    
+    /**
+     * update_time
+     */
+
     private Date updateTime;
 
 
@@ -92,5 +95,5 @@ public class SupplierPO extends Model<SupplierPO> {
     public Serializable pkVal() {
         return this.id;
     }
-    }
+}
 

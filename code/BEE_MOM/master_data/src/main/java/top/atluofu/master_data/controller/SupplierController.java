@@ -1,15 +1,15 @@
 package top.atluofu.master_data.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import top.atluofu.common.result.LuoFuPage;
 import top.atluofu.common.result.ResultUtils;
+import top.atluofu.master_data.dto.SupplierListDTO;
 import top.atluofu.master_data.po.SupplierPO;
-import top.atluofu.master_data.query.SupplierQuery;
 import top.atluofu.master_data.service.SupplierService;
 
 import java.io.Serializable;
@@ -36,11 +36,6 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
-    @PostMapping("/page")
-    public ResultUtils selectPage(@RequestBody SupplierQuery supplier) {
-        return ResultUtils.success(this.supplierService.getPage(supplier));
-    }
-
     /**
      * 分页查询所有数据
      *
@@ -48,9 +43,11 @@ public class SupplierController {
      * @param supplier 查询实体
      * @return 所有数据
      */
-    @GetMapping
-    public ResultUtils selectAll(Page<SupplierPO> page, SupplierPO supplier) {
-        return ResultUtils.success(this.supplierService.page(page, new QueryWrapper<>(supplier)));
+    @PostMapping("list/{pageNo}/{pageSize}")
+    public ResultUtils selectAll(@PathVariable int pageNo, @PathVariable int pageSize, @RequestBody(required = false) SupplierListDTO supplier) {
+        List<SupplierListDTO> all = supplierService.getAll(supplier);
+        LuoFuPage<SupplierListDTO> supplierListDTOLuoFuPage = new LuoFuPage<>(pageNo, pageSize, all.size(), all);
+        return ResultUtils.success(supplierListDTOLuoFuPage);
     }
 
     /**
@@ -61,7 +58,7 @@ public class SupplierController {
      */
     @GetMapping("{id}")
     public ResultUtils selectOne(@PathVariable Serializable id) {
-        return ResultUtils.success(this.supplierService.getById(id));
+        return ResultUtils.success(SupplierListDTO.toDTO(this.supplierService.getById(id)));
     }
 
     /**
@@ -87,13 +84,25 @@ public class SupplierController {
     }
 
     /**
+     * 根据id删除数据
+     *
+     * @param id 要删除的数据的id
+     * @return 删除结果
+     */
+    @DeleteMapping("{id}")
+    @Operation(description = "根据id删除")
+    public ResultUtils deleteOne(@PathVariable Long id) {
+        return ResultUtils.success(this.supplierService.removeById(id));
+    }
+
+    /**
      * 删除数据
      *
      * @param idList 主键结合
      * @return 删除结果
      */
     @DeleteMapping
-    public ResultUtils delete(@RequestParam("idList") List<Long> idList) {
+    public ResultUtils delete(@RequestBody List<Long> idList) {
         return ResultUtils.success(this.supplierService.removeByIds(idList));
     }
 }

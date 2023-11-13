@@ -44,6 +44,27 @@
         values(supplier_phone) , enable_status = values(enable_status) , remark_info = values(remark_info) , deleted =
         values(deleted) , create_time = values(create_time) , update_time = values(update_time)
     </insert>
+    <!-- 根据调教查询 -->
+    <select id="getAll" resultType="top.atluofu.master_data.po.SupplierPO">
+        select *
+        from enterprise_master_data.supplier
+        where deleted = 0
+        <if test="${supplier.supplierNo != null}">
+            and supplier_no = #{supplier.supplierNo}
+        </if>
+        <if test="${supplier.supplierName != null}">
+            and supplier_name like CONCACT('%', #{supplier.supplierName}, '%')
+        </if>
+        <if test="${supplier.shortName != null}">
+            and shortName like CONCACT('%', #{supplier.shortName}, '%')
+        </if>
+        <if test="${supplier.supplierGrade != null}">
+            and supplier_grade = #{supplier.supplierGrade}
+        </if>
+        <if test="${supplier.enableStatus != null}">
+            and enable_status = #{supplier.enableStatus}
+        </if>
+    </select>
 
 </mapper>
 
