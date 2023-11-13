@@ -24,10 +24,11 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springOpenAPI() {
         Server devServer = new Server();
-        devServer.setUrl("www.atluofu.com/masterData");
+        devServer.setUrl("http://localhost:8081");
         devServer.setDescription("Server URL in Development environment");
         Server prodServer = new Server();
         prodServer.setUrl("www.atluofu.cn/masterData");
+        devServer.setDescription("Server URL in Product environment");
         Contact contact = new Contact();
         contact.setEmail("mqa010225@gmail.com");
         contact.setName("Allen-D-Alexander");

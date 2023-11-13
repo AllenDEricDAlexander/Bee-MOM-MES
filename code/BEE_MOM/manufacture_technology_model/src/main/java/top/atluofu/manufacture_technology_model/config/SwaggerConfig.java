@@ -24,7 +24,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springOpenAPI() {
         Server devServer = new Server();
-        devServer.setUrl("www.atluofu.com/manufactureTechnologyModel");
+        devServer.setUrl("http://localhost:8082");
         devServer.setDescription("Server URL in Development environment");
         Server prodServer = new Server();
         prodServer.setUrl("www.atluofu.cn/manufactureTechnologyModel");
