@@ -1,10 +1,11 @@
 package top.atluofu.master_data.dao;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import top.atluofu.master_data.po.SupplierPO;
+
+import java.util.List;
 
 /**
  * (Supplier)表数据库访问层
@@ -12,6 +13,7 @@ import top.atluofu.master_data.po.SupplierPO;
  * @author atluofu
  * @since 2023-10-27 09:05:31
  */
+@Mapper
 public interface SupplierDao extends BaseMapper<SupplierPO> {
 
     /**
@@ -30,6 +32,5 @@ public interface SupplierDao extends BaseMapper<SupplierPO> {
     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
     */
     int insertOrUpdateBatch(@Param("entities") List<SupplierPO> entities);
-
 }
 

@@ -29,14 +29,16 @@ public class ProductionToolingController {
     /**
      * 服务对象
      */
-    private ProductionToolingService productionToolingService;
-    
-    ProductionToolingController(ProductionToolingService productionToolingService){this.productionToolingService = productionToolingService;}
+    private final ProductionToolingService productionToolingService;
+
+    ProductionToolingController(ProductionToolingService productionToolingService) {
+        this.productionToolingService = productionToolingService;
+    }
 
     /**
      * 分页查询所有数据
      *
-     * @param page 分页对象
+     * @param page              分页对象
      * @param productionTooling 查询实体
      * @return 所有数据
      */

@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.atluofu.common.result.ResultUtils;
 import top.atluofu.master_data.po.SupplierPO;
+import top.atluofu.master_data.query.SupplierQuery;
 import top.atluofu.master_data.service.SupplierService;
 
 import java.io.Serializable;
@@ -29,14 +30,21 @@ public class SupplierController {
     /**
      * 服务对象
      */
-    private SupplierService supplierService;
-    
-    SupplierController(SupplierService supplierService){this.supplierService = supplierService;}
+    private final SupplierService supplierService;
+
+    SupplierController(SupplierService supplierService) {
+        this.supplierService = supplierService;
+    }
+
+    @PostMapping("/page")
+    public ResultUtils selectPage(@RequestBody SupplierQuery supplier) {
+        return ResultUtils.success(this.supplierService.getPage(supplier));
+    }
 
     /**
      * 分页查询所有数据
      *
-     * @param page 分页对象
+     * @param page     分页对象
      * @param supplier 查询实体
      * @return 所有数据
      */

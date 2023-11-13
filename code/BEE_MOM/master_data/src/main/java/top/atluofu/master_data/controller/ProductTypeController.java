@@ -29,14 +29,16 @@ public class ProductTypeController {
     /**
      * 服务对象
      */
-    private ProductTypeService productTypeService;
-    
-    ProductTypeController(ProductTypeService productTypeService){this.productTypeService = productTypeService;}
+    private final ProductTypeService productTypeService;
+
+    ProductTypeController(ProductTypeService productTypeService) {
+        this.productTypeService = productTypeService;
+    }
 
     /**
      * 分页查询所有数据
      *
-     * @param page 分页对象
+     * @param page        分页对象
      * @param productType 查询实体
      * @return 所有数据
      */
