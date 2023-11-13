@@ -29,4 +29,9 @@ public class DemoController {
         return masterDataFeignController.hello();
     }
 
+    @GetMapping("/toAll")
+    public String toAll() {
+        return "hello my sir";
+    }
+
 }

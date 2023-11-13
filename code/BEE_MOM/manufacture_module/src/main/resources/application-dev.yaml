@@ -11,6 +11,9 @@ spring:
     url: jdbc:mysql://localhost:3306/manufacture_module?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
     password: MQa12345
+  devtools:
+    restart:
+      enabled: true
 
 # springdoc-openapi项目配置
 springdoc:
@@ -43,3 +46,9 @@ logging:
   config: classpath:log/logback-spring.xml
   level:
     root: info
+
+minio:
+  endpoint: http://127.0.0.1:9000 #Minio服务所在地址
+  bucketName: manufactureModel #存储桶名称
+  accessKey: manufactureModel #访问的key
+  secretKey: manufactureModel #访问的秘钥

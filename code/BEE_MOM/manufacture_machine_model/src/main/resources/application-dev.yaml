@@ -12,7 +12,9 @@ spring:
     url: jdbc:mysql://localhost:3306/manufacture_machine_model?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
     password: MQa12345
-
+  devtools:
+    restart:
+      enabled: true
 # springdoc-openapi项目配置
 springdoc:
   swagger-ui:
@@ -43,3 +45,9 @@ logging:
   config: classpath:log/logback-spring.xml
   level:
     root: info
+
+minio:
+  endpoint: http://127.0.0.1:9000 #Minio服务所在地址
+  bucketName: machineModel #存储桶名称
+  accessKey: machineModel #访问的key
+  secretKey: machineModel #访问的秘钥

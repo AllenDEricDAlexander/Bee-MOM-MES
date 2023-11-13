@@ -11,7 +11,7 @@ spring:
       routes:
         - id: masterData
           uri: lb://masterData
-#          uri: http://localhost:8081
+          #          uri: http://localhost:8081
           predicates:
             - Path=/masterData/**
           filters:
@@ -34,7 +34,18 @@ spring:
             - Path=/technology/**
           filters:
             - StripPrefix=1
-
+        - id: qaModel
+          uri: lb://qaModel
+          predicates:
+            - Path=/qaModel/**
+          filters:
+            - StripPrefix=1
+        - id: qaModel
+          uri: lb://wsmModel
+          predicates:
+            - Path=/wsmModel/**
+          filters:
+            - StripPrefix=1
 #yml配置
 logging:
   file:
