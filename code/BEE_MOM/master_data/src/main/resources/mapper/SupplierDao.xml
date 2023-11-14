@@ -49,19 +49,19 @@
         select *
         from enterprise_master_data.supplier
         where deleted = 0
-        <if test="${supplier.supplierNo != null}">
+        <if test="supplier.supplierNo != null">
             and supplier_no = #{supplier.supplierNo}
         </if>
-        <if test="${supplier.supplierName != null}">
+        <if test="supplier.supplierName != null">
             and supplier_name like CONCACT('%', #{supplier.supplierName}, '%')
         </if>
-        <if test="${supplier.shortName != null}">
+        <if test="supplier.shortName != null">
             and shortName like CONCACT('%', #{supplier.shortName}, '%')
         </if>
-        <if test="${supplier.supplierGrade != null}">
+        <if test="supplier.supplierGrade != null">
             and supplier_grade = #{supplier.supplierGrade}
         </if>
-        <if test="${supplier.enableStatus != null}">
+        <if test="supplier.enableStatus != null">
             and enable_status = #{supplier.enableStatus}
         </if>
     </select>

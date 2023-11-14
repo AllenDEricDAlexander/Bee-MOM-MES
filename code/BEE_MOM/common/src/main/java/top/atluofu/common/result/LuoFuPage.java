@@ -32,7 +32,7 @@ public class LuoFuPage<T> implements Serializable {
         this.pageSize = pageSize;
         this.total = total;
         ArrayList<T> ts = new ArrayList<>();
-        for (int i = 0; i < pageSize; i++) {
+        for (int i = (index - 1) * pageSize; i < pageSize * index && i < records.size(); i++) {
             ts.add(records.get(i));
         }
         this.records = ts;

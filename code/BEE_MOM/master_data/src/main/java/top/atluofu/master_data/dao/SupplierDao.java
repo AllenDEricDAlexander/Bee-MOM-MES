@@ -33,6 +33,6 @@ public interface SupplierDao extends BaseMapper<SupplierPO> {
      */
     int insertOrUpdateBatch(@Param("entities") List<SupplierPO> entities);
 
-    List<SupplierPO> getAll(SupplierPO supplier);
+    List<SupplierPO> getAll(@Param("supplier") SupplierPO supplier);
 }
 
