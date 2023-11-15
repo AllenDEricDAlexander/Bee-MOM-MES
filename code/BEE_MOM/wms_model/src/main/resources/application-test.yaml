@@ -26,23 +26,12 @@ feign:
     enabled: false
 
 
-# springdoc-openapi项目配置
 springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: alpha
   api-docs:
-    path: /v3/api-docs
-  group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: top.atluofu.wms_model.controller
-  default-flat-param-object: true
-knife4j:
-  enable: false
-  setting:
-    language: zh_cn
+    enable: false
+  swagger-ui:
+    path: /
+    enabled: false
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml
@@ -56,3 +45,9 @@ logging:
   config: classpath:log/logback-spring.xml
   level:
     root: info
+
+minio:
+  endpoint: http://127.0.0.1:9000 #Minio服务所在地址
+  bucketName: wmsModel #存储桶名称
+  accessKey: wmsModel #访问的key
+  secretKey: wmsModel #访问的秘钥

@@ -21,7 +21,7 @@ public class DemoController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "hello world By QA_MODEL";
+        return "Hello World By QA_MODEL";
     }
 
     @GetMapping("/tec")

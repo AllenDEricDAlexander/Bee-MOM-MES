@@ -30,8 +30,11 @@ feign:
 
 
 springdoc:
+  api-docs:
+    enable: true
   swagger-ui:
     path: /
+    enabled: true
 
 mybatis-plus:
   mapper-locations: classpath*:resources/mapper/*.xml

@@ -29,19 +29,21 @@ public class WorkCenterController {
     /**
      * 服务对象
      */
-    private WorkCenterService workCenterService;
-    
-    WorkCenterController(WorkCenterService workCenterService){this.workCenterService = workCenterService;}
+    private final WorkCenterService workCenterService;
+
+    WorkCenterController(WorkCenterService workCenterService) {
+        this.workCenterService = workCenterService;
+    }
 
     /**
      * 分页查询所有数据
      *
-     * @param page 分页对象
+     * @param page       分页对象
      * @param workCenter 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public ResultUtils selectAll(Page<WorkCenterPO> page, WorkCenterPO workCenter) {
+    public ResultUtils<Page<WorkCenterPO>> selectAll(Page<WorkCenterPO> page, WorkCenterPO workCenter) {
         return ResultUtils.success(this.workCenterService.page(page, new QueryWrapper<>(workCenter)));
     }
 
