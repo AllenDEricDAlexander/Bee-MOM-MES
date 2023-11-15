@@ -1,5 +1,6 @@
 package top.atluofu.wms_model.controller;
 
+import com.alibaba.druid.stat.DruidStatManagerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,11 @@ import top.atluofu.wms_model.feign.MasterDataFeignController;
 public class DemoController {
     @Autowired
     private MasterDataFeignController masterDataFeignController;
+
+    @GetMapping("/druid/stat")
+    public Object druidStat() {
+        return DruidStatManagerFacade.getInstance().getDataSourceStatDataList();
+    }
 
     @GetMapping("/hello")
     public String hello() {
