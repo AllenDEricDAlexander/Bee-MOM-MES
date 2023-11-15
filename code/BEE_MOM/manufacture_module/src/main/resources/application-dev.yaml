@@ -1,47 +1,6 @@
-server:
-  port: 8083
-  servlet:
-    context-path: /
-spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/manufacture_module?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: root
-    password: MQa12345
-  devtools:
-    restart:
-      enabled: true
-
 springdoc:
   api-docs:
     enable: true
   swagger-ui:
     path: /
     enabled: true
-
-mybatis-plus:
-  mapper-locations: classpath*:resources/mapper/*.xml
-  type-aliases-package: top.atluofu.manufacture_model.dao
-  configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-  global-config:
-    db-config:
-      logic-delete-field: deleted
-      logic-delete-value: 1
-      logic-not-delete-value: 0
-
-logging:
-  file:
-    path: /log/${spring.application.name}
-  config: classpath:log/logback-spring.xml
-  level:
-    root: info
-
-minio:
-  endpoint: http://127.0.0.1:9000 #Minio服务所在地址
-  bucketName: manufactureModel #存储桶名称
-  accessKey: manufactureModel #访问的key
-  secretKey: manufactureModel #访问的秘钥

@@ -1,6 +1,8 @@
 package top.atluofu.qa_model.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +16,18 @@ import top.atluofu.qa_model.feign.MasterDataFeignController;
  * @Version: 1.0
  */
 @RestController
+@RefreshScope
 @RequestMapping("demo")
 public class DemoController {
     @Autowired
     private MasterDataFeignController masterDataFeignController;
+    @Value("${springdoc.swagger-ui.enabled}")
+    private String version;
 
+    @GetMapping("/get")
+    public String get() {
+        return version;
+    }
     @GetMapping("/hello")
     public String hello() {
         return "hello world By QA_MODEL";

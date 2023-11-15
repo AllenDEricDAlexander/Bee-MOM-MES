@@ -1,40 +1,6 @@
-server:
-  port: 8084
-  servlet:
-    context-path: /
-spring:
-  servlet:
-    multipart:
-      max-file-size: 100MB
-      max-request-size: 100MB
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/manufacture_machine_model?characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    username: root
-    password: MQa12345
-
 springdoc:
   api-docs:
     enable: false
   swagger-ui:
     path: /
     enabled: false
-
-mybatis-plus:
-  mapper-locations: classpath*:resources/mapper/*.xml
-  type-aliases-package: top.atluofu.manufacture_machine_model.dao
-  configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-
-logging:
-  file:
-    path: /log/${spring.application.name}
-  config: classpath:log/logback-spring.xml
-  level:
-    root: info
-
-minio:
-  endpoint: http://127.0.0.1:9000 #Minio服务所在地址
-  bucketName: wmsModel #存储桶名称
-  accessKey: wmsModel #访问的key
-  secretKey: wmsModel #访问的秘钥
