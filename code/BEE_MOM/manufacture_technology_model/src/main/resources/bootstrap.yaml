@@ -9,11 +9,13 @@ spring:
     active: dev
   cloud:
     nacos:
+      username: nacos
+      password: MQa12345
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: http://121.43.53.97:8848
       config:
-        server-addr: 127.0.0.1:8848
-        namespace: 01d41a7e-41a7-489d-8560-3f34acfcbca9
+        server-addr: http://121.43.53.97:8848
+        namespace: e1be0085-f2d7-46da-b12d-9854b04bd0f4
         group: DEFAULT_GROUP
         file-extension: yaml
   datasource:

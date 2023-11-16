@@ -1,5 +1,6 @@
 package top.atluofu.wms_model;
 
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -15,7 +16,7 @@ import java.net.InetAddress;
 
 /**
  * @ClassName: WMSModelApplication
- * @description: TODO
+ * @description: WMSModelApplication
  * @author: 有罗敷的马同学
  * @datetime: 2023Year-11Month-07Day-8:58
  * @Version: 1.0
