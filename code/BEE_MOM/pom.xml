@@ -23,6 +23,7 @@
         <module>gateway</module>
         <module>qa_model</module>
         <module>wms_model</module>
+        <module>auth_center</module>
     </modules>
     <properties>
         <java.version>17</java.version>

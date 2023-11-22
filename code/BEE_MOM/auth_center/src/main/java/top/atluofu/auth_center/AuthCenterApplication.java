@@ -1,4 +1,5 @@
-package top.atluofu.wms_model;
+package top.atluofu.auth_center;
+
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,24 +14,23 @@ import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
 
-
 /**
- * @ClassName: WMSModelApplication
- * @description: TODO
+ * @ClassName: AuthCenterApplication
+ * @description: AuthCenterApplication
  * @author: 有罗敷的马同学
- * @datetime: 2023Year-11Month-07Day-8:58
+ * @datetime: 2023Year-11Month-19Day-11:14
  * @Version: 1.0
  */
 @Slf4j
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients
-@MapperScan(basePackages = "top.atluofu.wms_model.dao")
-@ComponentScan(basePackages = {"top.atluofu.wms_model", "top.atluofu.common"})
-public class WMSModelApplication {
+@MapperScan(basePackages = "top.atluofu.auth_ceter.dao")
+@ComponentScan(basePackages = {"top.atluofu.auth_ceter", "top.atluofu.common"})
+public class AuthCenterApplication {
     @SneakyThrows
     public static void main(String[] args) {
-        ConfigurableApplicationContext application = SpringApplication.run(WMSModelApplication.class, args);
+        ConfigurableApplicationContext application = SpringApplication.run(AuthCenterApplication.class, args);
         Environment env = application.getEnvironment();
         log.info("""
                         \t\t\n----------------------------------------------------------\n\t
