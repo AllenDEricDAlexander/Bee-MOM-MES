@@ -1,8 +1,12 @@
 spring:
+  application:
+    name: beeMomGateway
   cloud:
     nacos:
-      discovery:
-        server-addr: http://127.0.0.1:8848
+      server-addr: http://127.0.0.1:8848
+      namespace: beeMomGateway
+      group: beeMomGateway
+      file-extension: yaml
     gateway:
       discovery:
         locator:
